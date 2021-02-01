@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анна Зуева](https://up.htmlacademy.ru/react/6/user/642335).
-* Наставник: `Неизвестно`.
+* Наставник: [Алексей Овчинников](https://up.htmlacademy.ru/react/6/user/193375).
 
 ---
 

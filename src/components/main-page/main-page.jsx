@@ -1,9 +1,12 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import MovieCard from '../movie-card/movie-card';
 
 const MOVIES_COUNT = 20;
 
-const MainPage = () => {
+const MainPage = (props) => {
+  const {movieTitle, movieGenre, releaseYear} = props;
+
   return (
     <React.Fragment>
       <section className="movie-card">
@@ -36,10 +39,10 @@ const MainPage = () => {
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{movieTitle}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{movieGenre}</span>
+                <span className="movie-card__year">{releaseYear}</span>
               </p>
 
               <div className="movie-card__buttons">

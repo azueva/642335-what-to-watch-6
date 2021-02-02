@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from "react";
+import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
 
 const MOVIES_COUNT = 20;
@@ -126,6 +126,12 @@ const MainPage = (props) => {
       </div>
     </React.Fragment>
   );
+};
+
+MainPage.propTypes = {
+  movieTitle: PropTypes.string.isRequired,
+  movieGenre: PropTypes.string.isRequired,
+  releaseYear: PropTypes.string.isRequired,
 };
 
 export default MainPage;

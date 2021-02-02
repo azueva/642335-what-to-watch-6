@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import MainPage from '../main-page/main-page';
 
 const App = (props) => {
@@ -11,6 +11,12 @@ const App = (props) => {
       releaseYear={releaseYear}
     />
   );
+};
+
+App.propTypes = {
+  movieTitle: PropTypes.string.isRequired,
+  movieGenre: PropTypes.string.isRequired,
+  releaseYear: PropTypes.string.isRequired,
 };
 
 export default App;

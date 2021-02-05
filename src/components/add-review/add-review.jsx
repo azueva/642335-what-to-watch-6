@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-const AddReview = () => {
+const AddReview = (props) => {
+  // eslint-disable-next-line no-unused-vars
+  const {movieId} = props;
 
   return (
     <section className="movie-card movie-card--full">
@@ -90,6 +93,10 @@ const AddReview = () => {
       </div>
     </section>
   );
+};
+
+AddReview.propTypes = {
+  movieId: PropTypes.string.isRequired,
 };
 
 export default AddReview;

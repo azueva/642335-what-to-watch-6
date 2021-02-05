@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-const Player = () => {
+const Player = (props) => {
+  // eslint-disable-next-line no-unused-vars
+  const {movieId} = props;
 
   return (
     <div className="player">
@@ -36,6 +39,10 @@ const Player = () => {
       </div>
     </div>
   );
+};
+
+Player.propTypes = {
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Player;

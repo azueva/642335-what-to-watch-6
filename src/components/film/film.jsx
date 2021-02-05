@@ -1,9 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import MovieCard from '../movie-card/movie-card';
 
 const MOVIES_COUNT = 4;
 
-const Film = () => {
+const Film = (props) => {
+  // eslint-disable-next-line no-unused-vars
+  const {movieId} = props;
 
   return (
     <React.Fragment>
@@ -149,6 +152,10 @@ const Film = () => {
       </div>
     </React.Fragment>
   );
+};
+
+Film.propTypes = {
+  movieId: PropTypes.string.isRequired,
 };
 
 export default Film;

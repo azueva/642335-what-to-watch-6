@@ -1,5 +1,5 @@
 import React from "react";
-import MovieCard from '../movie-card/movie-card';
+import MovieCard from '../../blocks/movie-card/movie-card';
 
 const MOVIES_COUNT = 9;
 

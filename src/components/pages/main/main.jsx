@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import MovieCard from '../movie-card/movie-card';
+import MovieCard from '../../blocks/movie-card/movie-card';
 
 const MOVIES_COUNT = 20;
 
-const MainPage = (props) => {
+const Main = (props) => {
   const {movieTitle, movieGenre, releaseYear} = props;
 
   return (
@@ -128,10 +128,10 @@ const MainPage = (props) => {
   );
 };
 
-MainPage.propTypes = {
+Main.propTypes = {
   movieTitle: PropTypes.string.isRequired,
   movieGenre: PropTypes.string.isRequired,
   releaseYear: PropTypes.string.isRequired,
 };
 
-export default MainPage;
+export default Main;

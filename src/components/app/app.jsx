@@ -1,13 +1,13 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import MainPage from '../main-page/main-page';
-import SignIn from '../sign-in/sign-in';
-import MyList from '../my-list/my-list';
-import Film from '../film/film';
-import AddReview from '../add-review/add-review';
-import Player from '../player/player';
-import NotFound from '../not-found/not-found';
+import Main from '../pages/main/main';
+import SignIn from '../pages/sign-in/sign-in';
+import MyList from '../pages/my-list/my-list';
+import Film from '../pages/film/film';
+import AddReview from '../pages/add-review/add-review';
+import Player from '../pages/player/player';
+import NotFound from '../pages/not-found/not-found';
 
 const App = (props) => {
   const {movieTitle, movieGenre, releaseYear} = props;
@@ -17,7 +17,7 @@ const App = (props) => {
       <Switch>
 
         <Route exact path="/">
-          <MainPage
+          <Main
             movieTitle={movieTitle}
             movieGenre={movieGenre}
             releaseYear={releaseYear}

@@ -33,27 +33,33 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/films/:id"
-          render={({match}) => (
-            <Film
-              movieId={match.params.id}
-            />
-          )}
+          render={({match}) =>
+            !isNaN(parseInt(match.params.id, 10)) ?
+              <Film
+                movieId={match.params.id}
+              /> :
+              <NotFound />
+          }
         />
 
         <Route exact path="/films/:id/review"
-          render={({match}) => (
-            <AddReview
-              movieId={match.params.id}
-            />
-          )}
+          render={({match}) =>
+            !isNaN(parseInt(match.params.id, 10)) ?
+              <AddReview
+                movieId={match.params.id}
+              /> :
+              <NotFound />
+          }
         />
 
         <Route exact path="/player/:id"
-          render={({match}) => (
-            <Player
-              movieId={match.params.id}
-            />
-          )}
+          render={({match}) =>
+            !isNaN(parseInt(match.params.id, 10)) ?
+              <Player
+                movieId={match.params.id}
+              /> :
+              <NotFound />
+          }
         />
 
         <Route>

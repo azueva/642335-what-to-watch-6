@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import Header from '../../blocks/header/header';
 
 const AddReview = (props) => {
   // eslint-disable-next-line no-unused-vars
@@ -14,15 +15,7 @@ const AddReview = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
+        <Header>
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
@@ -33,13 +26,7 @@ const AddReview = (props) => {
               </li>
             </ul>
           </nav>
-
-          <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
-          </div>
-        </header>
+        </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
           <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
@@ -56,7 +43,7 @@ const AddReview = (props) => {
               <input className="rating__input" id="star-2" type="radio" name="rating" value="2" />
               <label className="rating__label" htmlFor="star-2">Rating 2</label>
 
-              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" checked />
+              <input className="rating__input" id="star-3" type="radio" name="rating" value="3" defaultChecked />
               <label className="rating__label" htmlFor="star-3">Rating 3</label>
 
               <input className="rating__input" id="star-4" type="radio" name="rating" value="4" />
@@ -71,7 +58,7 @@ const AddReview = (props) => {
               <input className="rating__input" id="star-7" type="radio" name="rating" value="7" />
               <label className="rating__label" htmlFor="star-7">Rating 7</label>
 
-              <input className="rating__input" id="star-8" type="radio" name="rating" value="8" checked />
+              <input className="rating__input" id="star-8" type="radio" name="rating" value="8" />
               <label className="rating__label" htmlFor="star-8">Rating 8</label>
 
               <input className="rating__input" id="star-9" type="radio" name="rating" value="9" />

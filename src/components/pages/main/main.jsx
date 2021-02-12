@@ -1,19 +1,21 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import MovieCard from '../../blocks/movie-card/movie-card';
+import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
-
-const MOVIES_COUNT = 20;
+import MovieProp from '../../props/movie.prop';
+import ReviewProp from '../../props/review.prop';
 
 const Main = (props) => {
-  const {movieTitle, movieGenre, releaseYear} = props;
+  const {films, promo} = props;
+  const {name, posterImage, backgroundImage, genre, released} = promo;
 
   return (
     <React.Fragment>
-      <section className="movie-card">
+      <section className="movie-card"
+      >
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -25,14 +27,14 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movieTitle}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movieGenre}</span>
-                <span className="movie-card__year">{releaseYear}</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -91,13 +93,10 @@ const Main = (props) => {
             </li>
           </ul>
 
-          <div className="catalog__movies-list">
-            {new Array(MOVIES_COUNT).fill(``).map((el, i) => <MovieCard key={i} />)}
-          </div>
+          <MoviesList
+            films={films}
+          />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer />
@@ -108,9 +107,9 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  movieTitle: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
-  releaseYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(MovieProp),
+  reviews: PropTypes.arrayOf(ReviewProp),
+  promo: MovieProp,
 };
 
 export default Main;

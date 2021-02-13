@@ -1,10 +1,12 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 
 const MovieCard = ({film, onHover}) => {
   const {id, name, previewImage} = film;
+  const history = useHistory();
+
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={() => {
@@ -14,7 +16,9 @@ const MovieCard = ({film, onHover}) => {
         onHover(null);
       }}
     >
-      <div className="small-movie-card__image">
+      <div className="small-movie-card__image"
+        onClick={() => history.push(`/films/${id}`)}
+      >
         <img
           src={previewImage}
           alt={name}

@@ -1,9 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 
 const AddReview = ({film}) => {
-  const {name, posterImage, backgroundImage, backgroundColor} = film;
+  const {id, name, posterImage, backgroundImage, backgroundColor} = film;
 
   return (
     <section className="movie-card movie-card--full"
@@ -20,10 +21,10 @@ const AddReview = ({film}) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">{name}</a>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <Link className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

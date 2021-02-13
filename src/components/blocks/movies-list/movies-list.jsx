@@ -36,7 +36,7 @@ class MoviesList extends PureComponent {
           }
         </div>
 
-        {(films.length >= listSize) && <ShowMore />}
+        {(films.length > listSize) && <ShowMore />}
 
       </React.Fragment>
     );

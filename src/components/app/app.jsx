@@ -44,6 +44,7 @@ const App = (props) => {
             return film ?
               <Film
                 film={film}
+                films={films}
               /> :
               <NotFound />;
           }}
@@ -55,7 +56,6 @@ const App = (props) => {
             return film ?
               <AddReview
                 film={film}
-                reviews={reviews}
               /> :
               <NotFound />;
           }}

@@ -13,3 +13,5 @@ export const GENRES = [
 
 export const MOVIES_LIST_SIZE = 8;
 export const EXTRA_MOVIES_LIST_SIZE = 4;
+
+export const Tabs = [`Overview`, `Details`, `Reviews`];

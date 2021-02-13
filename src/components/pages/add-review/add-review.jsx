@@ -1,16 +1,17 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 
-const AddReview = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const {movieId} = props;
+const AddReview = ({film}) => {
+  const {name, posterImage, backgroundImage, backgroundColor} = film;
 
   return (
-    <section className="movie-card movie-card--full">
+    <section className="movie-card movie-card--full"
+      style={({backgroundColor})}
+    >
       <div className="movie-card__header">
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -19,7 +20,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <a href="movie-page.html" className="breadcrumbs__link">The Grand Budapest Hotel</a>
+                <a href="movie-page.html" className="breadcrumbs__link">{name}</a>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -29,7 +30,7 @@ const AddReview = (props) => {
         </Header>
 
         <div className="movie-card__poster movie-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
         </div>
       </div>
 
@@ -69,7 +70,9 @@ const AddReview = (props) => {
             </div>
           </div>
 
-          <div className="add-review__text">
+          <div className="add-review__text"
+            style={{backgroundColor: `rgba(255, 255, 255, 0.23)`}}
+          >
             <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
               <button className="add-review__btn" type="submit">Post</button>
@@ -83,7 +86,7 @@ const AddReview = (props) => {
 };
 
 AddReview.propTypes = {
-  movieId: PropTypes.string.isRequired,
+  film: MovieProp.isRequired,
 };
 
 export default AddReview;

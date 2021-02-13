@@ -1,11 +1,12 @@
 import React from "react";
-import MovieCard from '../../blocks/movie-card/movie-card';
+import PropTypes from 'prop-types';
+import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
+import MovieProp from '../../props/movie.prop';
+import {MOVIES_LIST_SIZE} from "../../../const";
 
-const MOVIES_COUNT = 9;
-
-const MyList = () => {
+const MyList = ({films}) => {
 
   return (
     <div className="user-page">
@@ -16,14 +17,19 @@ const MyList = () => {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <div className="catalog__movies-list">
-          {new Array(MOVIES_COUNT).fill(``).map((el, i) => <MovieCard key={i} />)}
-        </div>
+        <MoviesList
+          films={films.filter((film) => film.isFavorite)}
+          listSize={MOVIES_LIST_SIZE}
+        />
       </section>
 
       <Footer />
     </div>
   );
+};
+
+MyList.propTypes = {
+  films: PropTypes.arrayOf(MovieProp),
 };
 
 export default MyList;

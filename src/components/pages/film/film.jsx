@@ -1,21 +1,26 @@
 import React from "react";
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
-import MovieCard from '../../blocks/movie-card/movie-card';
+import MovieProp from '../../props/movie.prop';
+import TabsList from '../../blocks/tabs-list/tabs-list';
+import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
+import {joinComponents, formatMinToHours} from "../../../utils";
+import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const MOVIES_COUNT = 4;
-
-const Film = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const {movieId} = props;
+const Film = ({film, films}) => {
+  const {id, name, posterImage, backgroundImage, backgroundColor, director,
+    starring, runTime, genre, released} = film;
 
   return (
     <React.Fragment>
-      <section className="movie-card movie-card--full">
+      <section className="movie-card movie-card--full"
+        style={({backgroundColor})}
+      >
         <div className="movie-card__hero">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={backgroundImage} alt={name} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -26,10 +31,10 @@ const Film = (props) => {
 
           <div className="movie-card__wrap">
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">Drama</span>
-                <span className="movie-card__year">2014</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
@@ -45,7 +50,11 @@ const Film = (props) => {
                   </svg>
                   <span>My list</span>
                 </button>
-                <a href="add-review.html" className="btn movie-card__button">Add review</a>
+
+                <Link className="btn movie-card__button" to={`/films/${id}/review`}>
+                  Add review
+                </Link>
+
               </div>
             </div>
           </div>
@@ -54,45 +63,22 @@ const Film = (props) => {
         <div className="movie-card__wrap movie-card__translate-top">
           <div className="movie-card__info">
             <div className="movie-card__poster movie-card__poster--big">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} swidth="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <nav className="movie-nav movie-card__nav">
-                <ul className="movie-nav__list">
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Overview</a>
-                  </li>
-                  <li className="movie-nav__item movie-nav__item--active">
-                    <a href="#" className="movie-nav__link">Details</a>
-                  </li>
-                  <li className="movie-nav__item">
-                    <a href="#" className="movie-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
+              <TabsList />
 
               <div className="movie-card__text movie-card__row">
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Director</strong>
-                    <span className="movie-card__details-value">Wes Andreson</span>
+                    <span className="movie-card__details-value">{director}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Starring</strong>
                     <span className="movie-card__details-value">
-                      Bill Murray, <br />
-                      Edward Norton, <br />
-                      Jude Law, <br />
-                      Willem Dafoe, <br />
-                      Saoirse Ronan, <br />
-                      Tony Revoloru, <br />
-                      Tilda Swinton, <br />
-                      Tom Wilkinson, <br />
-                      Owen Wilkinson, <br />
-                      Adrien Brody, <br />
-                      Ralph Fiennes, <br />
-                      Jeff Goldblum
+                      {joinComponents(starring, `,`, <br/>)}
                     </span>
                   </p>
                 </div>
@@ -100,15 +86,15 @@ const Film = (props) => {
                 <div className="movie-card__text-col">
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Run Time</strong>
-                    <span className="movie-card__details-value">1h 39m</span>
+                    <span className="movie-card__details-value">{formatMinToHours(runTime)}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Genre</strong>
-                    <span className="movie-card__details-value">Comedy</span>
+                    <span className="movie-card__details-value">{genre}</span>
                   </p>
                   <p className="movie-card__details-item">
                     <strong className="movie-card__details-name">Released</strong>
-                    <span className="movie-card__details-value">2014</span>
+                    <span className="movie-card__details-value">{released}</span>
                   </p>
                 </div>
               </div>
@@ -120,10 +106,10 @@ const Film = (props) => {
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
-
-          <div className="catalog__movies-list">
-            {new Array(MOVIES_COUNT).fill(``).map((el, i) => <MovieCard key={i} />)}
-          </div>
+          <MoviesList
+            films={films.filter((el) => el.genre === genre).slice(0, EXTRA_MOVIES_LIST_SIZE)}
+            listSize={EXTRA_MOVIES_LIST_SIZE}
+          />
         </section>
 
         <Footer />
@@ -133,7 +119,8 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
-  movieId: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(MovieProp).isRequired,
+  film: MovieProp.isRequired,
 };
 
 export default Film;

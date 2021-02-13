@@ -2,8 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import MovieProp from '../../props/movie.prop';
 import MovieCard from "../../blocks/movie-card/movie-card";
-
-const MOVIES_LIST_SIZE = 8;
+import ShowMore from "../../blocks/show-more/show-more";
 
 class MoviesList extends PureComponent {
   constructor(props) {
@@ -19,13 +18,13 @@ class MoviesList extends PureComponent {
   }
 
   render() {
-    const {films} = this.props;
+    const {films, listSize} = this.props;
 
     return (
       <React.Fragment>
         <div className="catalog__movies-list">
           {
-            films.map((film) =>
+            films.slice(0, listSize).map((film) =>
               (
                 <MovieCard
                   key={film.id}
@@ -37,11 +36,7 @@ class MoviesList extends PureComponent {
           }
         </div>
 
-        {(films.length >= MOVIES_LIST_SIZE) &&
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
-        }
+        {(films.length >= listSize) && <ShowMore />}
 
       </React.Fragment>
     );
@@ -50,7 +45,7 @@ class MoviesList extends PureComponent {
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
-  onHover: PropTypes.func,
+  listSize: PropTypes.number.isRequired,
 };
 
 export default MoviesList;

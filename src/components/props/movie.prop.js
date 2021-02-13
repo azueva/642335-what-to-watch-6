@@ -7,6 +7,7 @@ export default PropTypes.shape({
   previewImage: PropTypes.string.isRequired,
   backgroundImage: PropTypes.string.isRequired,
   backgroundColor: PropTypes.string.isRequired,
+  videoLink: PropTypes.string.isRequired,
   previewVideoLink: PropTypes.string.isRequired,
   description: PropTypes.arrayOf(PropTypes.string).isRequired,
   rating: PropTypes.number.isRequired,

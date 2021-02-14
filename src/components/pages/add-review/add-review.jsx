@@ -39,9 +39,6 @@ const AddReview = ({film}) => {
       <div className="add-review">
         <CommentForm
           rating={rating}
-          history={history}
-          // без ключа ошибка состояния формы
-          // key={id}
         />
       </div>
     </section>

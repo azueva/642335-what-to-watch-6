@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import TabsList from '../../blocks/tabs-list/tabs-list';
@@ -12,6 +12,11 @@ import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 const Film = ({film, films}) => {
   const {id, name, posterImage, backgroundImage, backgroundColor, director,
     starring, runTime, genre, released} = film;
+  const history = useHistory();
+
+  const handlePlayBtnClick = () => {
+    history.push(`/player/${id}`);
+  };
 
   return (
     <React.Fragment>
@@ -38,7 +43,9 @@ const Film = ({film, films}) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button"
+                  onClick={handlePlayBtnClick}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

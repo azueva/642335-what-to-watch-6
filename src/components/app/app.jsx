@@ -51,12 +51,11 @@ const App = (props) => {
         />
 
         <Route exact path="/films/:id/review"
-          render={({match, history}) => {
+          render={({match}) => {
             const film = getFilmById(match.params.id);
             return film ?
               <AddReview
                 film={film}
-                history={history}
               /> :
               <NotFound />;
           }}

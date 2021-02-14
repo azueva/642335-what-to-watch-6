@@ -1,15 +1,26 @@
 import React from "react";
+import {useHistory} from "react-router-dom";
+
 import PropTypes from 'prop-types';
 import {formatMinToTimeString} from '../../../utils';
 
 const Player = (props) => {
   const {name, videoLink, runTime} = props;
+  const history = useHistory();
+
+  const handleExitBtnClick = () => {
+    history.goBack();
+  };
 
   return (
     <div className="player">
       <video src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit"
+        onClick={handleExitBtnClick}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">

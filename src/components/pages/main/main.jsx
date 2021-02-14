@@ -1,4 +1,5 @@
 import React from "react";
+import {useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import GenresList from '../../blocks/genres-list/genres-list';
 import MoviesList from '../../blocks/movies-list/movies-list';
@@ -10,7 +11,12 @@ import {MOVIES_LIST_SIZE} from "../../../const";
 
 const Main = (props) => {
   const {films, promo} = props;
-  const {name, posterImage, backgroundImage, genre, released} = promo;
+  const {id, name, posterImage, backgroundImage, genre, released} = promo;
+  const history = useHistory();
+
+  const handlePlayBtnClick = () => {
+    history.push(`/player/${id}`);
+  };
 
   return (
     <React.Fragment>
@@ -40,7 +46,9 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button"
+                  onClick={handlePlayBtnClick}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

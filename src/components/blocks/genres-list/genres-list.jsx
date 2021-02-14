@@ -1,44 +1,33 @@
-import React, {PureComponent} from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {GENRES} from "../../../const";
 
-class GenresList extends PureComponent {
-  constructor(props) {
-    super(props);
+const GenresList = () => {
+  const initialGenre = GENRES[0];
+  const [activeGenre, setActiveGenre] = useState(initialGenre);
 
-    this.state = {
-      activeGenre: GENRES[0],
-    };
+  const handleLinkClick = (genre) => {
+    setActiveGenre(genre);
+  };
 
-    this.handleLinkClick = this.handleLinkClick.bind(this);
-  }
-
-  handleLinkClick(genre) {
-    this.setState({activeGenre: genre});
-  }
-
-  render() {
-    const {activeGenre} = this.state;
-
-    return (
-      <ul className="catalog__genres-list">
-        {
-          GENRES.map((genre) =>
-            (
-              <li
-                className={`catalog__genres-item ${activeGenre === genre
-                  ? `catalog__genres-item--active` : ``}`}
-                key={genre}
-                onClick={() => this.handleLinkClick(genre)}
-              >
-                <Link to="/" className="catalog__genres-link">{genre}</Link>
-              </li>
-            )
+  return (
+    <ul className="catalog__genres-list">
+      {
+        GENRES.map((genre) =>
+          (
+            <li
+              className={`catalog__genres-item ${activeGenre === genre
+                ? `catalog__genres-item--active` : ``}`}
+              key={genre}
+              onClick={() => handleLinkClick(genre)}
+            >
+              <Link to="/" className="catalog__genres-link">{genre}</Link>
+            </li>
           )
-        }
-      </ul>
-    );
-  }
-}
+        )
+      }
+    </ul>
+  );
+};
 
 export default GenresList;

@@ -8,6 +8,10 @@ const Header = (props) => {
   const {modificator = ``, isShowUser = true} = props;
   const history = useHistory();
 
+  const handleAvatarClick = () => {
+    history.push(`/mylist`);
+  };
+
   return (
     <header className={`page-header ${modificator}`}>
       <Logo />
@@ -17,7 +21,7 @@ const Header = (props) => {
         <div className="user-block">
           <div className="user-block__avatar">
             <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"
-              onClick={() => history.push(`/mylist`)}
+              onClick={handleAvatarClick}
             />
           </div>
         </div>

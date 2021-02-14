@@ -7,17 +7,25 @@ const MovieCard = ({film, onHover}) => {
   const {id, name, previewImage} = film;
   const history = useHistory();
 
+  const handleMouseEnter = () => {
+    onHover(id);
+  };
+
+  const handleMouseLeave = () => {
+    onHover(null);
+  };
+
+  const handleCardClick = () => {
+    history.push(`/films/${id}`);
+  };
+
   return (
     <article className="small-movie-card catalog__movies-card"
-      onMouseEnter={() => {
-        onHover(film.id);
-      }}
-      onMouseLeave={() => {
-        onHover(null);
-      }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="small-movie-card__image"
-        onClick={() => history.push(`/films/${id}`)}
+        onClick={handleCardClick}
       >
         <img
           src={previewImage}

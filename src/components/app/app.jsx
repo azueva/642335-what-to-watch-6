@@ -8,9 +8,13 @@ import Film from '../pages/film/film';
 import AddReview from '../pages/add-review/add-review';
 import Player from '../pages/player/player';
 import NotFound from '../pages/not-found/not-found';
+import MovieProp from '../props/movie.prop';
+import ReviewProp from '../props/review.prop';
+import {getRandomArrayItem, getFilmById} from "../../utils";
 
 const App = (props) => {
-  const {movieTitle, movieGenre, releaseYear} = props;
+  const {films, reviews} = props;
+  const promo = getRandomArrayItem(films);
 
   return (
     <BrowserRouter>
@@ -18,9 +22,9 @@ const App = (props) => {
 
         <Route exact path="/">
           <Main
-            movieTitle={movieTitle}
-            movieGenre={movieGenre}
-            releaseYear={releaseYear}
+            films={films}
+            reviews={reviews}
+            promo={promo}
           />
         </Route>
 
@@ -29,37 +33,45 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/mylist">
-          <MyList />
+          <MyList
+            films={films}
+          />
         </Route>
 
         <Route exact path="/films/:id"
-          render={({match}) =>
-            !isNaN(parseInt(match.params.id, 10)) ?
+          render={({match}) => {
+            const film = getFilmById(match.params.id);
+            return film ?
               <Film
-                movieId={match.params.id}
+                film={film}
+                films={films}
               /> :
-              <NotFound />
-          }
+              <NotFound />;
+          }}
         />
 
         <Route exact path="/films/:id/review"
-          render={({match}) =>
-            !isNaN(parseInt(match.params.id, 10)) ?
+          render={({match}) => {
+            const film = getFilmById(match.params.id);
+            return film ?
               <AddReview
-                movieId={match.params.id}
+                film={film}
               /> :
-              <NotFound />
-          }
+              <NotFound />;
+          }}
         />
 
         <Route exact path="/player/:id"
-          render={({match}) =>
-            !isNaN(parseInt(match.params.id, 10)) ?
+          render={({match}) => {
+            const film = getFilmById(match.params.id);
+            return film ?
               <Player
-                movieId={match.params.id}
+                name={film.name}
+                videoLink={film.videoLink}
+                runTime={film.runTime}
               /> :
-              <NotFound />
-          }
+              <NotFound />;
+          }}
         />
 
         <Route>
@@ -72,9 +84,8 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  movieTitle: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
-  releaseYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(MovieProp),
+  reviews: PropTypes.arrayOf(ReviewProp),
 };
 
 export default App;

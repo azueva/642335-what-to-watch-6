@@ -1,15 +1,26 @@
 import React from "react";
+import {useHistory} from "react-router-dom";
+
 import PropTypes from 'prop-types';
+import {formatMinToTimeString} from '../../../utils';
 
 const Player = (props) => {
-  // eslint-disable-next-line no-unused-vars
-  const {movieId} = props;
+  const {name, videoLink, runTime} = props;
+  const history = useHistory();
+
+  const handleExitBtnClick = () => {
+    history.goBack();
+  };
 
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src={videoLink} className="player__video" poster="img/player-poster.jpg"></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit"
+        onClick={handleExitBtnClick}
+      >
+        Exit
+      </button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -17,7 +28,7 @@ const Player = (props) => {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: `30%`}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{formatMinToTimeString(runTime)}</div>
         </div>
 
         <div className="player__controls-row">
@@ -27,7 +38,9 @@ const Player = (props) => {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">
+            {name}
+          </div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
@@ -42,7 +55,9 @@ const Player = (props) => {
 };
 
 Player.propTypes = {
-  movieId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  videoLink: PropTypes.string.isRequired,
+  runTime: PropTypes.number.isRequired,
 };
 
 export default Player;

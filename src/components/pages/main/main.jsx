@@ -1,19 +1,29 @@
 import React from "react";
+import {useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
-import MovieCard from '../../blocks/movie-card/movie-card';
+import GenresList from '../../blocks/genres-list/genres-list';
+import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
-
-const MOVIES_COUNT = 20;
+import MovieProp from '../../props/movie.prop';
+import ReviewProp from '../../props/review.prop';
+import {MOVIES_LIST_SIZE} from "../../../const";
 
 const Main = (props) => {
-  const {movieTitle, movieGenre, releaseYear} = props;
+  const {films, promo} = props;
+  const {id, name, posterImage, backgroundImage, genre, released} = promo;
+  const history = useHistory();
+
+  const handlePlayBtnClick = () => {
+    history.push(`/player/${id}`);
+  };
 
   return (
     <React.Fragment>
-      <section className="movie-card">
+      <section className="movie-card"
+      >
         <div className="movie-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -25,18 +35,20 @@ const Main = (props) => {
         <div className="movie-card__wrap">
           <div className="movie-card__info">
             <div className="movie-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="movie-card__desc">
-              <h2 className="movie-card__title">{movieTitle}</h2>
+              <h2 className="movie-card__title">{name}</h2>
               <p className="movie-card__meta">
-                <span className="movie-card__genre">{movieGenre}</span>
-                <span className="movie-card__year">{releaseYear}</span>
+                <span className="movie-card__genre">{genre}</span>
+                <span className="movie-card__year">{released}</span>
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button">
+                <button className="btn btn--play movie-card__button" type="button"
+                  onClick={handlePlayBtnClick}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -57,60 +69,23 @@ const Main = (props) => {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
-
-          <div className="catalog__movies-list">
-            {new Array(MOVIES_COUNT).fill(``).map((el, i) => <MovieCard key={i} />)}
-          </div>
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          <GenresList />
+          <MoviesList
+            films={films}
+            listSize={MOVIES_LIST_SIZE}
+          />
         </section>
 
         <Footer />
-
       </div>
     </React.Fragment>
   );
 };
 
 Main.propTypes = {
-  movieTitle: PropTypes.string.isRequired,
-  movieGenre: PropTypes.string.isRequired,
-  releaseYear: PropTypes.string.isRequired,
+  films: PropTypes.arrayOf(MovieProp),
+  reviews: PropTypes.arrayOf(ReviewProp),
+  promo: MovieProp,
 };
 
 export default Main;

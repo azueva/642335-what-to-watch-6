@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, {useState} from "react";
 import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
@@ -6,17 +5,14 @@ import MovieProp from '../../props/movie.prop';
 import VideoPlayer from "../../video-player/video-player";
 
 const VIDEO_TIMEOUT = 1000;
-
-const PlayerStatus = {
-  false: `STOP`,
-  true: `PLAY`,
-  undefined: `???`,
+const VideoStatus = {
+  ENDED: `ended`,
+  ERROR: `error`,
 };
 
 const MovieCard = ({film, onHover}) => {
   const {id, name, previewImage, previewVideoPoster, previewVideoLink} = film;
   const history = useHistory();
-  const [playerStatus, setPlayerStatus] = useState(null);
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const [timer, setTimer] = useState(null);
 
@@ -36,9 +32,10 @@ const MovieCard = ({film, onHover}) => {
     history.push(`/films/${id}`);
   };
 
-  const handlePlayerStatus = (status) => {
-    setPlayerStatus(PlayerStatus[status]);
-    console.log(`${playerStatus} => ${PlayerStatus[status]} ... ${id}.${name}`);
+  const handlePlayerStatusChange = (status) => {
+    if (status === VideoStatus.ENDED || status === VideoStatus.ERROR) {
+      setIsPlayerVisible(false);
+    }
   };
 
   return (
@@ -61,7 +58,7 @@ const MovieCard = ({film, onHover}) => {
               transform: `scale(1.2)`,
               objectFit: `cover`
             }}
-            onPlayerStatus={handlePlayerStatus}
+            onPlayerStatusChange={handlePlayerStatusChange}
           /> :
           <img
             src={previewImage}

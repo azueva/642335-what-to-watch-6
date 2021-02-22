@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 import {formatMinToTimeString} from '../../../utils';
 
 const POSTER = `img/player-poster.jpg`;
-const VIDEO_LINK = `media/sintel_trailer-480p.mp4`;
-
 
 const PlayerStatusName = {
   false: `STOP`,
@@ -21,7 +19,7 @@ const PlayButtonState = {
 };
 
 const Player = (props) => {
-  const {id, name, /* videoLink, */ runTime} = props;
+  const {id, name, videoLink, runTime} = props;
   const [playerStatus, setPlayerStatus] = useState(null);
   const [playButtonState, setPlayButtonState] = useState(PlayButtonState.PLAY);
   const [fullScreenButtonClick, setFullScreenButtonClick] = useState(null);
@@ -70,7 +68,7 @@ const Player = (props) => {
     >
       <VideoPlayer
         id={id}
-        src={VIDEO_LINK}
+        src={videoLink}
         poster={POSTER}
         onPlayerStatus={handlePlayerStatusChange}
         playButtonState={!playButtonState}
@@ -136,7 +134,7 @@ const Player = (props) => {
 Player.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string.isRequired,
-  // videoLink: PropTypes.string.isRequired,
+  videoLink: PropTypes.string.isRequired,
   runTime: PropTypes.number.isRequired,
 };
 

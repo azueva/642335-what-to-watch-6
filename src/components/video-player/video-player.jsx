@@ -1,70 +1,27 @@
-/* eslint-disable no-console */
 import React, {useState, useEffect, useRef} from "react";
 import PropTypes from 'prop-types';
-
-const VideoStatus = {
-  PLAYING: `playing`,
-  ENDED: `ended`,
-  ERROR: `error`,
-};
+import {VideoStatus} from "../../const";
 
 const VideoPlayer = (props) => {
   const {id, src, poster, onPlayerStatusChange} = props;
   const {isMuted = false, isAutoPlay = false} = props;
   const {width = `100%`, height = `100%`, style = {}} = props;
-
-  const [playerStatus, setPlayerStatus] = useState({
-    isReady: false,
-    status: undefined,
-  });
+  const [playerStatus, setPlayerStatus] = useState(false);
 
   const playerRef = useRef();
 
+  const handlePlayerEnded = () => setPlayerStatus(VideoStatus.ENDED);
 
-  const handlePlayerCanPlayThrough = () => {
-    console.log(`${id}.CanPlay`);
-    setPlayerStatus((prevPlayerStatus) => ({
-      ...prevPlayerStatus,
-      isReady: true,
-    }));
-  };
-
-  const handlePlayerPlay = () => {
-    console.log(`${id}.onplay`);
-    setPlayerStatus((prevPlayerStatus) => ({
-      ...prevPlayerStatus,
-      status: VideoStatus.PLAYING,
-    }));
-  };
-
-  const handlePlayerEnded = () => {
-    console.log(`${id}.onended`);
-    setPlayerStatus((prevPlayerStatus) => ({
-      ...prevPlayerStatus,
-      status: VideoStatus.ENDED,
-    }));
-  };
-
-  const handlePlayerError = () => {
-    console.log(`${id}.onerror`);
-    setPlayerStatus((prevPlayerStatus) => ({
-      ...prevPlayerStatus,
-      status: VideoStatus.ERROR,
-    }));
-  };
+  const handlePlayerError = () => setPlayerStatus(VideoStatus.ERROR);
 
   useEffect(() => {
-    console.log(`${id}* ${playerStatus}`);
-    onPlayerStatusChange(playerStatus.status);
+    onPlayerStatusChange(playerStatus);
   }, [playerStatus]);
 
 
   useEffect(() => {
-    /* componentWillUnmount */
     return () => {
-      console.log(`${id}.componentWillUnmount`);
       playerRef.current.oncanplaythrough = null;
-      playerRef.current.onplay = null;
       playerRef.current.onended = null;
       playerRef.current.onerror = null;
       playerRef.current = null;
@@ -81,8 +38,6 @@ const VideoPlayer = (props) => {
         muted={isMuted}
         ref={playerRef}
         poster={poster}
-        onCanPlayThrough={handlePlayerCanPlayThrough}
-        onPlay={handlePlayerPlay}
         onEnded={handlePlayerEnded}
         onError={handlePlayerError}
         width={width}

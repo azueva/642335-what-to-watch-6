@@ -3,12 +3,7 @@ import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import VideoPlayer from "../../video-player/video-player";
-
-const VIDEO_TIMEOUT = 1000;
-const VideoStatus = {
-  ENDED: `ended`,
-  ERROR: `error`,
-};
+import {VIDEO_TIMEOUT, VideoStatus} from "../../../const";
 
 const MovieCard = ({film, onHover}) => {
   const {id, name, previewImage, previewVideoPoster, previewVideoLink} = film;

@@ -40,6 +40,8 @@ const Player = (props) => {
   const handlePlayerStatusChange = (status) => {
     setPlayerStatus(PlayerStatusName[status]);
     console.log(`Play${id}. ${playerStatus} => ${PlayerStatusName[status]}`);
+    setPlayButtonState(!status);
+    console.log(`Play${id}. handlePlayerStatusChange setPlayButtonState => ${!status ? `PLAY` : `PAUSE`}}`);
   };
 
 
@@ -50,8 +52,6 @@ const Player = (props) => {
     setFullScreenButtonClick((prev) => !prev);
   };
 
-  // ⚡❕ здесь ошибка, не переключает состояние кнопки PLAY/PAUSE
-  // ⚡❕ если оно изменилось в полноэкранном режиме
   const handlePlayButtonClick = () => {
     console.log(`Play${id}. handlePlayButtonClick ${setPlayButtonState} => PAUSE}`);
     setPlayButtonState(PlayButtonState.PAUSE);

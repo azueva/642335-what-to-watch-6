@@ -21,7 +21,6 @@ const VideoPlayer = (props) => {
 
   useEffect(() => {
     return () => {
-      playerRef.current.oncanplaythrough = null;
       playerRef.current.onended = null;
       playerRef.current.onerror = null;
       playerRef.current = null;

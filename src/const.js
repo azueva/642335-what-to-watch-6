@@ -22,3 +22,10 @@ export const FieldsNames = {
   rating: `stars`,
   [`review-text`]: `comment`,
 };
+
+export const VIDEO_TIMEOUT = 1000;
+
+export const VideoStatus = {
+  ENDED: `ended`,
+  ERROR: `error`,
+};

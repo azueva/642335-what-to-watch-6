@@ -66,6 +66,7 @@ const App = (props) => {
             const film = getFilmById(match.params.id);
             return film ?
               <Player
+                id={film.id}
                 name={film.name}
                 videoLink={film.videoLink}
                 runTime={film.runTime}

@@ -15,7 +15,7 @@ const TabsList = ({activeTab, onTabClick}) => {
                 key={tab}
               >
                 <Link to="#" className="movie-nav__link"
-                  onClick = {(evt)=> {
+                  onClick = {(evt) => {
                     evt.preventDefault();
                     onTabClick(tab);
                   }}

@@ -37,15 +37,11 @@ const Tabs = ({film, reviews}) => {
     }
   };
 
-  const handleActiveTabChange = (tabName) => {
-    setActiveTab(tabName);
-  };
-
   return (
     <div className="movie-card__desc">
       <TabsList
         activeTab={activeTab}
-        onTabClick={handleActiveTabChange}
+        onTabClick={setActiveTab}
       />
       {getTabContent(activeTab)}
     </div>

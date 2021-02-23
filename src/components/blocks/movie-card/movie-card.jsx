@@ -49,8 +49,6 @@ const MovieCard = ({film, onHover}) => {
             src={previewVideoLink}
             poster={previewVideoPoster}
             style={{
-              WebkitTransform: `scale(1.2)`,
-              transform: `scale(1.2)`,
               objectFit: `cover`
             }}
             onPlayerStatusChange={handlePlayerStatusChange}

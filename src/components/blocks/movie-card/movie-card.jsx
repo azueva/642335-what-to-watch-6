@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
@@ -32,6 +32,13 @@ const MovieCard = ({film, onHover}) => {
       setIsPlayerVisible(false);
     }
   };
+
+  useEffect(() => {
+    /* componentWillUnmount */
+    return () => {
+      clearTimeout(timer);
+    };
+  });
 
   return (
     <article className="small-movie-card catalog__movies-card"

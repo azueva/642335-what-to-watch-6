@@ -45,6 +45,7 @@ const App = (props) => {
               <Film
                 film={film}
                 films={films}
+                reviews={reviews}
               /> :
               <NotFound />;
           }}

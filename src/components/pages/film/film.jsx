@@ -2,16 +2,15 @@ import React from "react";
 import {Link, useHistory} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
-import TabsList from '../../blocks/tabs-list/tabs-list';
+import ReviewProp from '../../props/review.prop';
 import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
-import {joinComponents, formatMinToHours} from "../../../utils";
+import Tabs from '../../blocks/tabs/tabs';
 import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const Film = ({film, films}) => {
-  const {id, name, posterImage, backgroundImage, backgroundColor, director,
-    starring, runTime, genre, released} = film;
+const Film = ({film, films, reviews}) => {
+  const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
   const history = useHistory();
 
   const handlePlayBtnClick = () => {
@@ -73,39 +72,11 @@ const Film = ({film, films}) => {
               <img src={posterImage} alt={`${name} poster`} swidth="218" height="327" />
             </div>
 
-            <div className="movie-card__desc">
-              <TabsList />
+            <Tabs
+              film={film}
+              reviews={reviews}
+            />
 
-              <div className="movie-card__text movie-card__row">
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Director</strong>
-                    <span className="movie-card__details-value">{director}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Starring</strong>
-                    <span className="movie-card__details-value">
-                      {joinComponents(starring, `,`, <br/>)}
-                    </span>
-                  </p>
-                </div>
-
-                <div className="movie-card__text-col">
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Run Time</strong>
-                    <span className="movie-card__details-value">{formatMinToHours(runTime)}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Genre</strong>
-                    <span className="movie-card__details-value">{genre}</span>
-                  </p>
-                  <p className="movie-card__details-item">
-                    <strong className="movie-card__details-name">Released</strong>
-                    <span className="movie-card__details-value">{released}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -128,6 +99,7 @@ const Film = ({film, films}) => {
 Film.propTypes = {
   films: PropTypes.arrayOf(MovieProp).isRequired,
   film: MovieProp.isRequired,
+  reviews: PropTypes.arrayOf(ReviewProp).isRequired,
 };
 
 export default Film;

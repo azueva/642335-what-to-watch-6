@@ -1,5 +1,4 @@
 import React from "react";
-import films from "./mocks/films";
 import {RatingNames, RatingLimits} from "./const";
 
 export const getRandomInteger = (min, max) => {
@@ -11,7 +10,7 @@ export const getRandomArrayItem = (array) => {
   return array[randomIndex];
 };
 
-export const getFilmById = (filmId) => {
+export const getFilmById = (filmId, films) => {
   if (isNaN(parseInt(filmId, 10))) {
     return undefined;
   }

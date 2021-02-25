@@ -40,7 +40,7 @@ const App = (props) => {
 
         <Route exact path="/films/:id"
           render={({match}) => {
-            const film = getFilmById(match.params.id);
+            const film = getFilmById(match.params.id, films);
             return film ?
               <Film
                 film={film}
@@ -53,7 +53,7 @@ const App = (props) => {
 
         <Route exact path="/films/:id/review"
           render={({match}) => {
-            const film = getFilmById(match.params.id);
+            const film = getFilmById(match.params.id, films);
             return film ?
               <AddReview
                 film={film}
@@ -64,7 +64,7 @@ const App = (props) => {
 
         <Route exact path="/player/:id"
           render={({match}) => {
-            const film = getFilmById(match.params.id);
+            const film = getFilmById(match.params.id, films);
             return film ?
               <Player
                 id={film.id}

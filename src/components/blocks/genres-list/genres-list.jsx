@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
@@ -7,7 +7,12 @@ import MovieProp from '../../props/movie.prop';
 import {ALL_GENRES} from "../../../const";
 
 const GenresList = (props) => {
-  const {activeGenre, films, onGenreItemClick} = props;
+  const {activeGenre, films, onGenreItemClick, resetGenresList} = props;
+
+  useEffect(() => {
+    /* componentDidMount */
+    resetGenresList();
+  }, []);
 
   const [genres] = useState([...new Set(films.map((film) => film.genre))].sort());
 
@@ -42,6 +47,7 @@ GenresList.propTypes = {
   activeGenre: PropTypes.string,
   films: PropTypes.arrayOf(MovieProp),
   onGenreItemClick: PropTypes.func.isRequired,
+  resetGenresList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -57,6 +63,9 @@ const mapDispatchToProps = (dispatch) => ({
       dispatch(ActionCreator.changeGenre(genre));
     }
     dispatch(ActionCreator.getMovies());
+  },
+  resetGenresList() {
+    dispatch(ActionCreator.resetGenre());
   },
 });
 

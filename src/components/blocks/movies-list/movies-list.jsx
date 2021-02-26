@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 import MovieProp from '../../props/movie.prop';
 import MovieCard from "../../blocks/movie-card/movie-card";
@@ -40,4 +41,10 @@ MoviesList.propTypes = {
   listSize: PropTypes.number.isRequired,
 };
 
-export default MoviesList;
+
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {MoviesList};
+export default connect(mapStateToProps, null)(MoviesList);

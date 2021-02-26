@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
@@ -9,7 +9,7 @@ import {ALL_GENRES} from "../../../const";
 const GenresList = (props) => {
   const {activeGenre, films, onGenreItemClick} = props;
 
-  const genres = Array.from(new Set(films.map((film) => film.genre))).sort();
+  const [genres] = useState([...new Set(films.map((film) => film.genre))].sort());
 
   return (
     <ul className="catalog__genres-list">
@@ -56,6 +56,7 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(ActionCreator.changeGenre(genre));
     }
+    dispatch(ActionCreator.getMovies());
   },
 });
 

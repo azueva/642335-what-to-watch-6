@@ -22,7 +22,6 @@ const App = (props) => {
 
         <Route exact path="/">
           <Main
-            films={films}
             reviews={reviews}
             promo={promo}
           />

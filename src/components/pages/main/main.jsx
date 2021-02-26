@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
 import PropTypes from 'prop-types';
 import GenresList from '../../blocks/genres-list/genres-list';
 import MoviesList from '../../blocks/movies-list/movies-list';
@@ -9,14 +11,22 @@ import MovieProp from '../../props/movie.prop';
 import ReviewProp from '../../props/review.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
 
+
 const Main = (props) => {
-  const {films, promo} = props;
+  const {promo, resetPage} = props;
   const {id, name, posterImage, backgroundImage, genre, released} = promo;
   const history = useHistory();
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
   };
+
+  useEffect(() => {
+    /* componentWillUnmount */
+    return () => {
+      resetPage();
+    };
+  });
 
   return (
     <React.Fragment>
@@ -71,7 +81,6 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList />
           <MoviesList
-            films={films}
             listSize={MOVIES_LIST_SIZE}
           />
         </section>
@@ -86,6 +95,16 @@ Main.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
   reviews: PropTypes.arrayOf(ReviewProp),
   promo: MovieProp,
+  getMovies: PropTypes.func,
+  resetPage: PropTypes.func,
 };
 
-export default Main;
+const mapDispatchToProps = (dispatch) => ({
+  resetPage() {
+    dispatch(ActionCreator.resetGenre());
+    dispatch(ActionCreator.getMovies());
+  },
+});
+
+export {Main};
+export default connect(null, mapDispatchToProps)(Main);

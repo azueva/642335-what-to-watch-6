@@ -17,6 +17,13 @@ export const getFilmById = (filmId, films) => {
   return films.find((film) => film.id === parseInt(filmId, 10));
 };
 
+export const getFilmsByGenre = (genre, films) => {
+  if (genre) {
+    return films.filter((film) => film.genre === genre);
+  }
+  return films;
+};
+
 export const formatMinToTimeString = (mins) => {
   const hours = Math.trunc(mins / 60);
   const minutes = mins % 60;

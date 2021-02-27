@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-// import MovieProp from '../components/props/movie.prop';
+import PropTypes from "prop-types";
+import MovieProp from '../../props/movie.prop';
 import ShowMore from "../components/blocks/show-more/show-more";
 
 export const withShowMore = (Component) => {
 
-  const addShowNore = (propsParameters) => {
+  const addShowMore = (propsParameters) => {
     const {films, listSize} = propsParameters;
     const [shownItems, setShownItems] = useState(listSize);
 
@@ -28,7 +29,12 @@ export const withShowMore = (Component) => {
     );
   };
 
-  return addShowNore;
+  addShowMore.propTypes = {
+    films: PropTypes.arrayOf(MovieProp),
+    listSize: PropTypes.number.isRequired,
+  };
+
+  return addShowMore;
 };
 
 export default withShowMore;

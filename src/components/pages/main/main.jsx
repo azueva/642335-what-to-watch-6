@@ -8,25 +8,18 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
-import ReviewProp from '../../props/review.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
+import {getFilmsByGenre} from "../../../store/selectors";
 
 
 const Main = (props) => {
-  const {promo, resetPage} = props;
+  const {films, promo} = props;
   const {id, name, posterImage, backgroundImage, genre, released} = promo;
   const history = useHistory();
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
   };
-
-  useEffect(() => {
-    /* componentWillUnmount */
-    return () => {
-      resetPage();
-    };
-  });
 
   return (
     <React.Fragment>
@@ -81,6 +74,7 @@ const Main = (props) => {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList />
           <MoviesList
+            films={films}
             listSize={MOVIES_LIST_SIZE}
           />
         </section>
@@ -93,18 +87,14 @@ const Main = (props) => {
 
 Main.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
-  reviews: PropTypes.arrayOf(ReviewProp),
   promo: MovieProp,
-  getMovies: PropTypes.func,
   resetPage: PropTypes.func,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  resetPage() {
-    dispatch(ActionCreator.resetGenre());
-    dispatch(ActionCreator.getMovies());
-  },
+const mapStateToProps = (state) => ({
+  activeGenre: state.genre,
+  films: getFilmsByGenre(state.genre, state.films),
 });
 
 export {Main};
-export default connect(null, mapDispatchToProps)(Main);
+export default connect(mapStateToProps, null)(Main);

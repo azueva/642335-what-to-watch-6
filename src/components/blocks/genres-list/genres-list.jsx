@@ -1,20 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
-import {ALL_GENRES} from "../../../const";
+import {ALL_GENRES, GENRES_LIST_SIZE} from "../../../const";
 
 const GenresList = (props) => {
-  const {activeGenre, films, onGenreItemClick, resetGenresList} = props;
-
-  useEffect(() => {
-    /* componentDidMount */
-    resetGenresList();
-  }, []);
-
-  const [genres] = useState([...new Set(films.map((film) => film.genre))].sort());
+  const {activeGenre, films, onGenreItemClick} = props;
+  const genres = [...new Set(films.map((film) => film.genre))]
+    .sort().slice(0, GENRES_LIST_SIZE);
 
   return (
     <ul className="catalog__genres-list">
@@ -47,7 +42,6 @@ GenresList.propTypes = {
   activeGenre: PropTypes.string,
   films: PropTypes.arrayOf(MovieProp),
   onGenreItemClick: PropTypes.func.isRequired,
-  resetGenresList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -62,10 +56,6 @@ const mapDispatchToProps = (dispatch) => ({
     } else {
       dispatch(ActionCreator.changeGenre(genre));
     }
-    dispatch(ActionCreator.getMovies());
-  },
-  resetGenresList() {
-    dispatch(ActionCreator.resetGenre());
   },
 });
 

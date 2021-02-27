@@ -8,14 +8,10 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case ActionType.GET_MOVIES:
-      const {cbFilter} = action.payload;
-      const currentFilter = state.genre;
-      const getFilmsFiltered = (filmList) => cbFilter(currentFilter, filmList);
+    case ActionType.GET_ALL_MOVIES:
       return {
         ...state,
-        films: getFilmsFiltered(initialState.films),
+        films: initialState.films
       };
 
     case ActionType.CHANGE_GENRE:
@@ -24,9 +20,7 @@ const reducer = (state = initialState, action) => {
         genre: action.payload
       };
   }
-
   return state;
 };
-
 
 export {reducer};

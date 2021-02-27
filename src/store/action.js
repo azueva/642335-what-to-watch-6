@@ -1,17 +1,12 @@
-import {getFilmsByGenre} from '../utils';
-
 export const ActionType = {
-  GET_MOVIES: `getMovies`,
+  GET_ALL_MOVIES: `getAllMovies`,
   CHANGE_GENRE: `changeGenre`,
   RESET_GENRE: `resetGenre`,
 };
 
 export const ActionCreator = {
-  getMovies: () => ({
-    type: ActionType.GET_MOVIES,
-    payload: {
-      cbFilter: getFilmsByGenre,
-    },
+  getAllMovies: () => ({
+    type: ActionType.GET_ALL_MOVIES,
   }),
 
   changeGenre: (payload) => ({

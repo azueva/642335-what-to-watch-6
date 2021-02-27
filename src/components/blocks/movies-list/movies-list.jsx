@@ -4,13 +4,15 @@ import MovieProp from '../../props/movie.prop';
 import MovieCard from "../../blocks/movie-card/movie-card";
 
 const MoviesList = (props) => {
-  const {films, listSize} = props;
+  const {films, listSize, checkShowedAll = () => {}} = props;
   const [activeMovieCardId, setActiveMovieCardId] = useState(null);
 
   const handleMovieCardHover = (id) => {
     setActiveMovieCardId(id);
     return activeMovieCardId;
   };
+
+  checkShowedAll(films.length <= listSize);
 
   return (
     <div className="catalog__movies-list">
@@ -32,6 +34,7 @@ const MoviesList = (props) => {
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
   listSize: PropTypes.number,
+  checkShowedAll: PropTypes.func,
 };
 
 export default MoviesList;

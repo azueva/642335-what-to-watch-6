@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import MovieProp from '../../props/movie.prop';
 import MovieCard from "../../blocks/movie-card/movie-card";
-import ShowMore from "../../blocks/show-more/show-more";
 
 const MoviesList = (props) => {
   const {films, listSize} = props;
@@ -14,30 +13,25 @@ const MoviesList = (props) => {
   };
 
   return (
-    <React.Fragment>
-      <div className="catalog__movies-list">
-        {
-          films.slice(0, listSize).map((film) =>
-            (
-              <MovieCard
-                key={film.id}
-                film={film}
-                onHover={handleMovieCardHover}
-              />
-            )
+    <div className="catalog__movies-list">
+      {
+        films.slice(0, listSize).map((film) =>
+          (
+            <MovieCard
+              key={film.id}
+              film={film}
+              onHover={handleMovieCardHover}
+            />
           )
-        }
-      </div>
-
-      {(films.length > listSize) && <ShowMore />}
-
-    </React.Fragment>
+        )
+      }
+    </div>
   );
 };
 
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
-  listSize: PropTypes.number.isRequired,
+  listSize: PropTypes.number,
 };
 
 export default MoviesList;

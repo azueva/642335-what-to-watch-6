@@ -13,9 +13,14 @@ import {getFilmsByGenre} from "../../../store/selectors";
 
 
 const Main = (props) => {
-  const {films, promo} = props;
+  const {films, promo, resetPage} = props;
   const {id, name, posterImage, backgroundImage, genre, released} = promo;
   const history = useHistory();
+
+  useEffect(() => {
+    /* componentDidMount */
+    resetPage();
+  }, []);
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
@@ -96,5 +101,11 @@ const mapStateToProps = (state) => ({
   films: getFilmsByGenre(state.genre, state.films),
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  resetPage() {
+    dispatch(ActionCreator.resetGenre());
+  },
+});
+
 export {Main};
-export default connect(mapStateToProps, null)(Main);
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

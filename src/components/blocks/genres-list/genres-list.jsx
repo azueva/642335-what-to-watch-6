@@ -6,20 +6,16 @@ import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import {ALL_GENRES, GENRES_LIST_SIZE} from "../../../const";
 
+const createGenreList = (summaryItem, filmsList) => [summaryItem]
+  .concat([...new Set(filmsList.map((film) => film.genre))].sort());
+
 const GenresList = (props) => {
   const {activeGenre, films, onGenreItemClick} = props;
-  const genres = [...new Set(films.map((film) => film.genre))]
-    .sort().slice(0, GENRES_LIST_SIZE);
+  const genres = createGenreList(ALL_GENRES, films)
+    .slice(0, GENRES_LIST_SIZE);
 
   return (
     <ul className="catalog__genres-list">
-      <li
-        className={`catalog__genres-item ${!activeGenre ? `catalog__genres-item--active` : ``}`}
-        key={ALL_GENRES}
-        onClick={() => onGenreItemClick(ALL_GENRES)}
-      >
-        <Link to="/" className="catalog__genres-link">{ALL_GENRES}</Link>
-      </li>
       {
         genres.map((genre) =>
           (
@@ -51,11 +47,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreItemClick(genre) {
-    if (genre === ALL_GENRES) {
-      dispatch(ActionCreator.resetGenre());
-    } else {
-      dispatch(ActionCreator.changeGenre(genre));
-    }
+    dispatch(ActionCreator.changeGenre(genre));
   },
 });
 

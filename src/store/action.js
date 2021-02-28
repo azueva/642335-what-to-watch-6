@@ -1,7 +1,8 @@
+import {ALL_GENRES} from "../const";
+
 export const ActionType = {
-  GET_ALL_MOVIES: `getAllMovies`,
-  CHANGE_GENRE: `changeGenre`,
-  RESET_GENRE: `resetGenre`,
+  GET_ALL_MOVIES: `GET_ALL_MOVIES`,
+  CHANGE_GENRE: `CHANGE_GENRE`,
 };
 
 export const ActionCreator = {
@@ -16,6 +17,6 @@ export const ActionCreator = {
 
   resetGenre: () => ({
     type: ActionType.CHANGE_GENRE,
-    payload: null,
+    payload: ALL_GENRES,
   })
 };

@@ -8,7 +8,7 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
-import {MOVIES_LIST_SIZE} from "../../../const";
+import {MOVIES_LIST_SIZE, ALL_GENRES} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
 import {withShowMore} from "../../../hocs/with-show-more.jsx";
 
@@ -83,6 +83,7 @@ const Main = (props) => {
           <MainMoviesList
             films={films}
             listSize={MOVIES_LIST_SIZE}
+            listLength={films.length}
           />
         </section>
 

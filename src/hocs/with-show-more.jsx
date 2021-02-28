@@ -2,42 +2,31 @@ import React, {useState} from 'react';
 import PropTypes from "prop-types";
 import ShowMore from "../components/blocks/show-more/show-more";
 
-export const withShowMore = (Component) => {
+export const withShowMore = (Component) => function withShowMoreWrapper(props) {
+  const {listSize, listLength, ...restProps} = props;
+  const [shownItems, setShownItems] = useState(listSize);
 
-  const addShowMore = (propsParameters) => {
-    const {listSize} = propsParameters;
-    const [shownItems, setShownItems] = useState(listSize);
-    const [isHideButton, setIsHideButton] = useState(false);
+  const handleShowMoreClick = () => setShownItems((prevShownItem) =>
+    prevShownItem + listSize
+  );
 
-    const handleShowedAll = (isShowedAll) => {
-      setIsHideButton(isShowedAll);
-    };
-
-    const handleShowMoreClick = () => setShownItems((prevShownItem) =>
-      prevShownItem + listSize
-    );
-
-    return (
-      <React.Fragment>
-
-        <Component
-          {...propsParameters}
-          listSize={shownItems}
-          checkShowedAll={handleShowedAll}
-        >
-        </ Component>
-
-        {!isHideButton && <ShowMore onClick={handleShowMoreClick} />}
-
-      </React.Fragment>
-    );
-  };
-
-  addShowMore.propTypes = {
+  withShowMoreWrapper.propTypes = {
     listSize: PropTypes.number.isRequired,
+    listLength: PropTypes.number.isRequired,
   };
 
-  return addShowMore;
+  return (
+    <React.Fragment>
+
+      <Component
+        {...restProps}
+        listSize={shownItems}
+      >
+      </ Component>
+      {shownItems < listLength && <ShowMore onClick={handleShowMoreClick} />}
+
+    </React.Fragment>
+  );
 };
 
 export default withShowMore;

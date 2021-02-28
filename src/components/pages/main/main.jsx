@@ -10,9 +10,6 @@ import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
-import {withShowMore} from "../../../hocs/with-show-more.jsx";
-
-const MainMoviesList = withShowMore(MoviesList);
 
 const Main = (props) => {
   const {films, promo, resetPage} = props;
@@ -80,10 +77,9 @@ const Main = (props) => {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenresList />
-          <MainMoviesList
+          <MoviesList
             films={films}
             listSize={MOVIES_LIST_SIZE}
-            listLength={films.length}
           />
         </section>
 

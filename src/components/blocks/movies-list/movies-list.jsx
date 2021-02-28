@@ -1,31 +1,41 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import MovieProp from '../../props/movie.prop';
-import MovieCard from "../../blocks/movie-card/movie-card";
+import MovieCard from "../movie-card/movie-card";
+import ShowMore from "../show-more/show-more";
 
 const MoviesList = (props) => {
-  const {films, listSize} = props;
+  const {films, listSize = films.length} = props;
   const [activeMovieCardId, setActiveMovieCardId] = useState(null);
+  const [shownItems, setShownItems] = useState(listSize);
 
   const handleMovieCardHover = (id) => {
     setActiveMovieCardId(id);
     return activeMovieCardId;
   };
 
+  const handleShowMoreClick = () => setShownItems((prevShownItem) =>
+    prevShownItem + listSize
+  );
+
   return (
-    <div className="catalog__movies-list">
-      {
-        films.slice(0, listSize).map((film) =>
-          (
-            <MovieCard
-              key={film.id}
-              film={film}
-              onHover={handleMovieCardHover}
-            />
+    <React.Fragment>
+      <div className="catalog__movies-list">
+        {
+          films.slice(0, shownItems).map((film) =>
+            (
+              <MovieCard
+                key={film.id}
+                film={film}
+                onHover={handleMovieCardHover}
+              />
+            )
           )
-        )
-      }
-    </div>
+        }
+      </div>
+
+      {shownItems < films.length && <ShowMore onClick={handleShowMoreClick} />}
+    </React.Fragment>
   );
 };
 

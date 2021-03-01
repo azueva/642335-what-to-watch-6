@@ -85,7 +85,7 @@ const Film = ({film, films, reviews}) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={films.filter((el) => el.genre === genre).slice(0, EXTRA_MOVIES_LIST_SIZE)}
+            films={films.filter((el) => el.genre === genre)}
             listSize={EXTRA_MOVIES_LIST_SIZE}
           />
         </section>

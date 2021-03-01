@@ -1,15 +1,5 @@
-export const GENRES = [
-  `All genres`,
-  `Comedies`,
-  `Crime`,
-  `Documentary`,
-  `Dramas`,
-  `Horror`,
-  `Kids & Family`,
-  `Romance`,
-  `Sci-Fi`,
-  `Thrillers`
-];
+export const ALL_GENRES = `All genres`;
+export const GENRES_LIST_SIZE = 9;
 
 export const MOVIES_LIST_SIZE = 8;
 export const EXTRA_MOVIES_LIST_SIZE = 4;

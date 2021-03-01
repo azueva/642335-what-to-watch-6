@@ -412,7 +412,7 @@ export default [
     director: `David Fincher`,
     starring: [`Bill Murray`, `Edward Norton`, `Jude Law`, `Willem Dafoe`, `Saoirse Ronan`, `Tony Revoloru`, `Tilda Swinton`, `Adrien Brody`],
     runTime: 99,
-    genre: `Thrillers`,
+    genre: `Thriller`,
     released: 2017,
     isFavorite: false,
   },

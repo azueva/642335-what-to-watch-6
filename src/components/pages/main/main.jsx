@@ -1,18 +1,25 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
 import PropTypes from 'prop-types';
 import GenresList from '../../blocks/genres-list/genres-list';
 import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
-import ReviewProp from '../../props/review.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
+import {getFilmsByGenre} from "../../../store/selectors";
 
 const Main = (props) => {
-  const {films, promo} = props;
+  const {films, promo, resetPage} = props;
   const {id, name, posterImage, backgroundImage, genre, released} = promo;
   const history = useHistory();
+
+  useEffect(() => {
+    /* componentDidMount */
+    resetPage();
+  }, []);
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
@@ -84,8 +91,20 @@ const Main = (props) => {
 
 Main.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
-  reviews: PropTypes.arrayOf(ReviewProp),
   promo: MovieProp,
+  resetPage: PropTypes.func,
 };
 
-export default Main;
+const mapStateToProps = (state) => ({
+  activeGenre: state.genre,
+  films: getFilmsByGenre(state.genre, state.films),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  resetPage() {
+    dispatch(ActionCreator.resetGenre());
+  },
+});
+
+export {Main};
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

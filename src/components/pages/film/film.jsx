@@ -11,13 +11,13 @@ import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
 import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const Film = ({film, films, reviews, loadComments, isDataLoaded}) => {
+const Film = ({film, films, reviews, loadComments}) => {
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
   const history = useHistory();
 
   useEffect(() => {
     loadComments(id);
-  }, [isDataLoaded]);
+  }, [film]);
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
@@ -107,12 +107,10 @@ Film.propTypes = {
   film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
   loadComments: PropTypes.func,
-  isDataLoaded: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
   reviews: state.reviews,
-  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

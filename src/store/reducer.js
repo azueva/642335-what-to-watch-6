@@ -5,7 +5,7 @@ const initialState = {
   genre: ALL_GENRES,
   films: [],
   promo: {},
-  isDataLoaded: {films: false, promo: false, reviews: false},
+  isDataLoaded: {films: false, promo: false},
   reviews: [],
 };
 
@@ -35,7 +35,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         reviews: action.payload,
-        isDataLoaded: {...state.isDataLoaded, reviews: true}
       };
   }
   return state;

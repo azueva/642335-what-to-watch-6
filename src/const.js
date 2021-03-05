@@ -35,3 +35,21 @@ export const RatingLimits = {
   VERY_GOOD: 8,
   AWESOME: 10,
 };
+
+export const ApiPaths = {
+  FILMS: `/films`,
+  PROMO: `/films/promo`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+};
+
+export const BACKEND_URL = `https://6.react.pages.academy/wtw`;
+export const REQUEST_TIMEOUT = 5000;
+
+export const HttpCode = {
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
+};

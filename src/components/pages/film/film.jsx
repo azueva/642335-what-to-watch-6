@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, useHistory} from "react-router-dom";
+import {connect} from 'react-redux';
+import {fetchComments} from "../../../store/api-action";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import ReviewProp from '../../props/review.prop';
@@ -9,9 +11,13 @@ import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
 import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const Film = ({film, films, reviews}) => {
+const Film = ({film, films, reviews, loadComments}) => {
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
   const history = useHistory();
+
+  useEffect(() => {
+    loadComments(id);
+  }, [film]);
 
   const handlePlayBtnClick = () => {
     history.push(`/player/${id}`);
@@ -100,6 +106,18 @@ Film.propTypes = {
   films: PropTypes.arrayOf(MovieProp).isRequired,
   film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
+  loadComments: PropTypes.func,
 };
 
-export default Film;
+const mapStateToProps = (state) => ({
+  reviews: state.reviews,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadComments(movieId) {
+    dispatch(fetchComments(movieId));
+  },
+});
+
+export {Film};
+export default connect(mapStateToProps, mapDispatchToProps)(Film);

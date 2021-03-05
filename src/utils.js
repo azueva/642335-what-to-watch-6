@@ -1,15 +1,6 @@
 import React from "react";
 import {RatingNames, RatingLimits} from "./const";
 
-export const getRandomInteger = (min, max) => {
-  return min + Math.floor((max - min + 1) * Math.random());
-};
-
-export const getRandomArrayItem = (array) => {
-  const randomIndex = getRandomInteger(0, array.length - 1);
-  return array[randomIndex];
-};
-
 export const getFilmById = (filmId, films) => {
   if (isNaN(parseInt(filmId, 10))) {
     return undefined;
@@ -55,4 +46,34 @@ export const ratingToName = (rating) => {
       return RatingNames.BAD;
     default: return ``;
   }
+};
+
+const rawToFilm = (raw) => {
+  return ({
+    id: raw.id,
+    name: raw.name,
+    posterImage: raw.poster_image,
+    previewImage: raw.preview_image,
+    previewVideoPoster: raw.poster_image,
+    backgroundImage: raw.background_image,
+    backgroundColor: raw.background_color,
+    videoLink: raw.video_link,
+    previewVideoLink: raw.preview_video_link,
+    description: [raw.description],
+    rating: raw.rating,
+    scoresCount: raw.scores_count,
+    director: raw.director,
+    starring: raw.starring,
+    runTime: raw.run_time,
+    genre: raw.genre,
+    released: raw.released,
+    isFavorite: raw.is_favorite,
+  });
+};
+
+const rawToComment = (raw) => Object.assign({}, raw, {date: raw.date.slice(0, 10)});
+
+export const adapter = {
+  rawToFilm,
+  rawToComment,
 };

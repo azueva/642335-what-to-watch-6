@@ -53,3 +53,8 @@ export const HttpCode = {
   UNAUTHORIZED: 401,
   NOT_FOUND: 404,
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

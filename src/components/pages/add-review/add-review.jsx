@@ -25,7 +25,7 @@ const AddReview = ({film}) => {
                 <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link className="breadcrumbs__link">Add review</Link>
+                <Link to="#" className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>

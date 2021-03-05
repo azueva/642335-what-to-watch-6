@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
@@ -32,4 +33,9 @@ MyList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
 };
 
-export default MyList;
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {MyList};
+export default connect(mapStateToProps, null)(MyList);

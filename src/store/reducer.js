@@ -1,24 +1,41 @@
 import {ActionType} from './action';
-import films from "../mocks/films";
 import {ALL_GENRES} from "../const";
 
 const initialState = {
   genre: ALL_GENRES,
-  films,
+  films: [],
+  promo: {},
+  isDataLoaded: {films: false, promo: false, reviews: false},
+  reviews: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.GET_ALL_MOVIES:
-      return {
-        ...state,
-        films: initialState.films
-      };
-
     case ActionType.CHANGE_GENRE:
       return {
         ...state,
         genre: action.payload
+      };
+
+    case ActionType.LOAD_MOVIES:
+      return {
+        ...state,
+        films: action.payload,
+        isDataLoaded: {...state.isDataLoaded, films: true}
+      };
+
+    case ActionType.LOAD_PROMO:
+      return {
+        ...state,
+        promo: action.payload,
+        isDataLoaded: {...state.isDataLoaded, promo: true}
+      };
+
+    case ActionType.LOAD_COMMENTS:
+      return {
+        ...state,
+        reviews: action.payload,
+        isDataLoaded: {...state.isDataLoaded, reviews: true}
       };
   }
   return state;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Main from '../pages/main/main';
 import SignIn from '../pages/sign-in/sign-in';
 import MyList from '../pages/my-list/my-list';
@@ -9,22 +10,17 @@ import AddReview from '../pages/add-review/add-review';
 import Player from '../pages/player/player';
 import NotFound from '../pages/not-found/not-found';
 import MovieProp from '../props/movie.prop';
-import ReviewProp from '../props/review.prop';
-import {getRandomArrayItem, getFilmById} from "../../utils";
+import {getFilmById} from "../../utils";
 
 const App = (props) => {
-  const {films, reviews} = props;
-  const promo = getRandomArrayItem(films);
+  const {films} = props;
 
   return (
     <BrowserRouter>
       <Switch>
 
         <Route exact path="/">
-          <Main
-            reviews={reviews}
-            promo={promo}
-          />
+          <Main />
         </Route>
 
         <Route exact path="/login">
@@ -32,9 +28,7 @@ const App = (props) => {
         </Route>
 
         <Route exact path="/mylist">
-          <MyList
-            films={films}
-          />
+          <MyList />
         </Route>
 
         <Route exact path="/films/:id"
@@ -44,7 +38,6 @@ const App = (props) => {
               <Film
                 film={film}
                 films={films}
-                reviews={reviews}
               /> :
               <NotFound />;
           }}
@@ -86,7 +79,12 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
-  reviews: PropTypes.arrayOf(ReviewProp),
 };
 
-export default App;
+
+const mapStateToProps = (state) => ({
+  films: state.films,
+});
+
+export {MyList};
+export default connect(mapStateToProps, null)(App);

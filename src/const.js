@@ -35,3 +35,12 @@ export const RatingLimits = {
   VERY_GOOD: 8,
   AWESOME: 10,
 };
+
+export const ApiPaths = {
+  FILMS: `/films`,
+  PROMO: `/films/promo`,
+  FAVORITE: `/favorite`,
+  COMMENTS: `/comments`,
+  LOGIN: `/login`,
+  LOGOUT: `/logout`,
+};

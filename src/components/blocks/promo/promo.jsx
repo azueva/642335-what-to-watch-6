@@ -7,6 +7,7 @@ const Promo = (props) => {
   const {promo} = props;
   const {name, posterImage, backgroundImage, genre, released} = promo;
   const headerButtonsList = props.children;
+  const {redirectToPath} = props;
 
   return (
     <section className="movie-card"
@@ -19,6 +20,7 @@ const Promo = (props) => {
 
       <Header
         modificator="movie-card__head"
+        onAvatarClick={redirectToPath}
       />
 
       <div className="movie-card__wrap">
@@ -46,6 +48,7 @@ const Promo = (props) => {
 Promo.propTypes = {
   promo: MovieProp,
   children: PropTypes.node,
+  redirectToPath: PropTypes.func,
 };
 
 export default Promo;

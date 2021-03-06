@@ -4,8 +4,10 @@ import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 import CommentForm from '../../blocks/comment-form/comment-form';
 
-const AddReview = ({film}) => {
+const AddReview = (props) => {
+  const {film} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, rating} = film;
+  const {redirectToPath, redirectToPrevPage} = props;
 
   return (
     <section className="movie-card movie-card--full"
@@ -18,7 +20,9 @@ const AddReview = ({film}) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header>
+        <Header
+          onAvatarClick={redirectToPath}
+        >
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
@@ -39,6 +43,7 @@ const AddReview = ({film}) => {
       <div className="add-review">
         <CommentForm
           rating={rating}
+          redirectToPrevPage={redirectToPrevPage}
         />
       </div>
     </section>
@@ -47,6 +52,8 @@ const AddReview = ({film}) => {
 
 AddReview.propTypes = {
   film: MovieProp.isRequired,
+  redirectToPath: MovieProp.func,
+  redirectToPrevPage: MovieProp.func,
 };
 
 export default AddReview;

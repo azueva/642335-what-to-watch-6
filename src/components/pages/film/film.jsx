@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {fetchComments} from "../../../store/api-action";
 import PropTypes from 'prop-types';
@@ -11,17 +11,18 @@ import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
 import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const Film = ({film, films, reviews, loadComments}) => {
+const Film = (props) => {
+  const {film, films, reviews, loadComments} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
-  const history = useHistory();
+  const {redirectToPath} = props;
 
   useEffect(() => {
     loadComments(id);
   }, [film]);
 
-  const handlePlayBtnClick = () => {
-    history.push(`/player/${id}`);
-  };
+  // const handlePlayBtnClick = () => {
+  //   history.push(`/player/${id}`);
+  // };
 
   return (
     <React.Fragment>
@@ -37,6 +38,7 @@ const Film = ({film, films, reviews, loadComments}) => {
 
           <Header
             modificator="movie-card__head"
+            onAvatarClick={redirectToPath}
           />
 
           <div className="movie-card__wrap">
@@ -49,7 +51,7 @@ const Film = ({film, films, reviews, loadComments}) => {
 
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button"
-                  onClick={handlePlayBtnClick}
+                  onClick={() => redirectToPath(`/player/${id}`)}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -93,6 +95,7 @@ const Film = ({film, films, reviews, loadComments}) => {
           <MoviesList
             films={films.filter((el) => el.genre === genre)}
             listSize={EXTRA_MOVIES_LIST_SIZE}
+            redirectToPath={redirectToPath}
           />
         </section>
 
@@ -107,6 +110,7 @@ Film.propTypes = {
   film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
   loadComments: PropTypes.func,
+  redirectToPath: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

@@ -8,6 +8,7 @@ const MoviesList = (props) => {
   const {films, listSize = films.length} = props;
   const [activeMovieCardId, setActiveMovieCardId] = useState(null);
   const [shownItems, setShownItems] = useState(listSize);
+  const {redirectToPath} = props;
 
   const handleMovieCardHover = (id) => {
     setActiveMovieCardId(id);
@@ -28,6 +29,7 @@ const MoviesList = (props) => {
                 key={film.id}
                 film={film}
                 onHover={handleMovieCardHover}
+                redirectToPath={redirectToPath}
               />
             )
           )
@@ -42,6 +44,7 @@ const MoviesList = (props) => {
 MoviesList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
   listSize: PropTypes.number,
+  redirectToPath: PropTypes.func,
 };
 
 export default MoviesList;

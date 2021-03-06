@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
 import {MAX_RATING, FieldsNames} from "../../../const";
 
 const CommentForm = (props) => {
-  const {rating: initialRating} = props;
-  const history = useHistory();
+  const {rating: initialRating, redirectToPrevPage} = props;
 
   const [reviewForm, setReviewForm] = useState({
     stars: Math.round(initialRating),
@@ -16,7 +14,7 @@ const CommentForm = (props) => {
     const {comment} = reviewForm;
     evt.preventDefault();
     if (comment.toString().length >= 10 && comment.toString().length <= 50) {
-      history.goBack();
+      redirectToPrevPage();
     }
   };
 
@@ -67,7 +65,7 @@ const CommentForm = (props) => {
 
 CommentForm.propTypes = {
   rating: PropTypes.number,
-  history: PropTypes.object.isRequired
+  redirectToPrevPage: PropTypes.func,
 };
 
 export default CommentForm;

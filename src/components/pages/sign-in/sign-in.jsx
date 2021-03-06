@@ -1,5 +1,4 @@
 import React, {useRef} from "react";
-import {useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../../store/api-action";
@@ -7,11 +6,9 @@ import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 
 const SignIn = (props) => {
-  const {onSubmit} = props;
+  const {onSubmit, redirectToMain} = props;
   const loginRef = useRef();
   const passwordRef = useRef();
-
-  const history = useHistory();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -21,7 +18,7 @@ const SignIn = (props) => {
       password: passwordRef.current.value,
     });
 
-    history.push(`/`);
+    redirectToMain();
   };
 
   return (
@@ -76,6 +73,7 @@ const SignIn = (props) => {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  redirectToMain: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import browserHistory from "../../browser-history";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import PrivateRoute from '../private-route/private-route';
@@ -17,30 +18,34 @@ const App = (props) => {
   const {films} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
 
-        <Route exact path="/">
-          <Main />
-        </Route>
+        <Route exact path="/"
+          render={({history}) => (
+            <Main redirectToPath={history.push} />
+          )}
+        />
 
-        <Route exact path="/login">
-          <SignIn />
-        </Route>
+        <Route exact path="/login"
+          render={({history}) => (
+            <SignIn redirectToMain={() => history.push(`/`)} />
+          )}
+        />
 
         <PrivateRoute exact
           path="/mylist"
           render={() => <MyList />}
-        >
-        </PrivateRoute>
+        />
 
         <Route exact path="/films/:id"
-          render={({match}) => {
+          render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <Film
                 film={film}
                 films={films}
+                redirectToPath={history.push}
               /> :
               <NotFound />;
           }}
@@ -48,18 +53,20 @@ const App = (props) => {
 
         <PrivateRoute exact
           path="/films/:id/review"
-          render={({match}) => {
+          render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <AddReview
                 film={film}
+                redirectToPrevPage={() => history.go(-1)}
+                redirectToPath={history.push}
               /> :
               <NotFound />;
           }}
         />
 
         <Route exact path="/player/:id"
-          render={({match}) => {
+          render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <Player
@@ -67,6 +74,7 @@ const App = (props) => {
                 name={film.name}
                 videoLink={film.videoLink}
                 runTime={film.runTime}
+                redirectToPrevPage={() => history.go(-1)}
               /> :
               <NotFound />;
           }}

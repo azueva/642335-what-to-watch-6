@@ -7,12 +7,14 @@ import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
 
-const MyList = ({films}) => {
-
+const MyList = (props) => {
+  const {films} = props;
+  const {redirectToPath} = props;
   return (
     <div className="user-page">
       <Header
         modificator="user-page__head"
+        onAvatarClick={redirectToPath}
       />
 
       <section className="catalog">
@@ -21,6 +23,7 @@ const MyList = ({films}) => {
         <MoviesList
           films={films.filter((film) => film.isFavorite)}
           listSize={MOVIES_LIST_SIZE}
+          redirectToPath={redirectToPath}
         />
       </section>
 
@@ -31,6 +34,7 @@ const MyList = ({films}) => {
 
 MyList.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
+  redirectToPath: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

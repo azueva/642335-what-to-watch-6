@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import VideoPlayer from "../../video-player/video-player";
 import {VIDEO_TIMEOUT, VideoStatus} from "../../../const";
 
-const MovieCard = ({film, onHover}) => {
+const MovieCard = (props) => {
+  const {film, onHover} = props;
   const {id, name, previewImage, previewVideoPoster, previewVideoLink} = film;
-  const history = useHistory();
+  const {redirectToPath} = props;
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const [timer, setTimer] = useState(null);
 
@@ -23,9 +24,9 @@ const MovieCard = ({film, onHover}) => {
     setIsPlayerVisible(false);
   };
 
-  const handleCardClick = () => {
-    history.push(`/films/${id}`);
-  };
+  // const handleCardClick = () => {
+  //   history.push(`/films/${id}`);
+  // };
 
   const handlePlayerStatusChange = (status) => {
     if (status === VideoStatus.ENDED || status === VideoStatus.ERROR) {
@@ -46,7 +47,7 @@ const MovieCard = ({film, onHover}) => {
       onMouseLeave={handleMouseLeave}
     >
       <div className="small-movie-card__image"
-        onClick={handleCardClick}
+        onClick={() => redirectToPath(`/films/${id}`)}
       >
         {isPlayerVisible ?
           <VideoPlayer
@@ -79,5 +80,6 @@ const MovieCard = ({film, onHover}) => {
 MovieCard.propTypes = {
   film: MovieProp.isRequired,
   onHover: PropTypes.func.isRequired,
+  redirectToPath: PropTypes.func,
 };
 export default MovieCard;

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {useHistory} from "react-router-dom";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Logo from "../logo/logo";
@@ -9,11 +8,11 @@ import {AuthorizationStatus, ApiPaths} from "../../../const";
 
 const Header = (props) => {
   const {modificator = ``, isShowUserBlock = true, authorizationStatus} = props;
-  const history = useHistory();
+  const {onAvatarClick} = props;
 
-  const handleAvatarClick = () => {
-    history.push(`/mylist`);
-  };
+  // const handleAvatarClick = () => {
+  //   history.push(`/mylist`);
+  // };
 
   return (
     <header className={`page-header ${modificator}`}>
@@ -25,7 +24,7 @@ const Header = (props) => {
           {authorizationStatus === AuthorizationStatus.AUTH ? (
             <div className="user-block__avatar">
               <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"
-                onClick={handleAvatarClick}
+                onClick={() => onAvatarClick(`/mylist`)}
               />
             </div>
           ) : <Link to={ApiPaths.LOGIN} className="user-block__link">Sign in</Link>
@@ -41,6 +40,7 @@ Header.propTypes = {
   isShowUserBlock: PropTypes.bool,
   children: PropTypes.node,
   authorizationStatus: PropTypes.string.isRequired,
+  onAvatarClick: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

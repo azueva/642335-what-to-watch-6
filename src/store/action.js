@@ -6,6 +6,7 @@ export const ActionType = {
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  GET_USER_INFO: `GET_USER_INFO`,
 };
 
 export const ActionCreator = {
@@ -37,5 +38,10 @@ export const ActionCreator = {
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
+  }),
+
+  getUserInfo: (userInfo) => ({
+    type: ActionType.GET_USER_INFO,
+    payload: userInfo,
   }),
 };

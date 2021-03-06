@@ -9,7 +9,7 @@ const NotFound = () => {
     <div className="user-page">
       <Header
         modificator="user-page__head"
-        isShowUser={false}
+        isShowUserBlock={false}
       >
         <h1 className="page-title user-page__title">404. Page not found</h1>
       </Header>

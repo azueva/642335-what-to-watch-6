@@ -8,6 +8,7 @@ const initialState = {
   isDataLoaded: {films: false, promo: false},
   reviews: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  user: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -42,6 +43,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         authorizationStatus: action.payload,
+      };
+
+    case ActionType.GET_USER_INFO:
+      return {
+        ...state,
+        user: action.payload,
       };
   }
   return state;

@@ -2,6 +2,7 @@ import React from 'react';
 import {Switch, Route, BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import PrivateRoute from '../private-route/private-route';
 import Main from '../pages/main/main';
 import SignIn from '../pages/sign-in/sign-in';
 import MyList from '../pages/my-list/my-list';
@@ -27,9 +28,11 @@ const App = (props) => {
           <SignIn />
         </Route>
 
-        <Route exact path="/mylist">
-          <MyList />
-        </Route>
+        <PrivateRoute exact
+          path="/mylist"
+          render={() => <MyList />}
+        >
+        </PrivateRoute>
 
         <Route exact path="/films/:id"
           render={({match}) => {
@@ -43,7 +46,8 @@ const App = (props) => {
           }}
         />
 
-        <Route exact path="/films/:id/review"
+        <PrivateRoute exact
+          path="/films/:id/review"
           render={({match}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
@@ -87,4 +91,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MyList};
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps)(App);

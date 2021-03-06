@@ -6,7 +6,7 @@ import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 
 const SignIn = (props) => {
-  const {onSubmit, redirectToMain} = props;
+  const {onSubmit} = props;
   const loginRef = useRef();
   const passwordRef = useRef();
 
@@ -17,8 +17,6 @@ const SignIn = (props) => {
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
-
-    redirectToMain();
   };
 
   return (
@@ -73,7 +71,6 @@ const SignIn = (props) => {
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  redirectToMain: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

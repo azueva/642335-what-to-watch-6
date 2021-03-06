@@ -27,11 +27,9 @@ const App = (props) => {
           )}
         />
 
-        <Route exact path="/login"
-          render={({history}) => (
-            <SignIn redirectToMain={() => history.push(`/`)} />
-          )}
-        />
+        <Route exact path="/login">
+          <SignIn />
+        </Route>
 
         <PrivateRoute exact
           path="/mylist"

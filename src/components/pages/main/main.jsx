@@ -14,7 +14,7 @@ import {getFilmsByGenre} from "../../../store/selectors";
 
 const Main = (props) => {
   const {films = [], promo, loadMovies, loadPromo, resetPage, isDataLoaded} = props;
-  const {redirectToPath} = props;
+  const {redirectToRoute} = props;
 
   useEffect(() => {
     /* componentDidMount */
@@ -37,14 +37,13 @@ const Main = (props) => {
   }
 
   const handlePlayBtnClick = () => {
-    redirectToPath(`/player/${promo.id}`);
+    redirectToRoute(`/player/${promo.id}`);
   };
 
   return (
     <React.Fragment>
       <Promo
         promo={promo}
-        redirectToPath={redirectToPath}
       >
         <div className="movie-card__buttons">
           <button className="btn btn--play movie-card__button" type="button"
@@ -71,7 +70,6 @@ const Main = (props) => {
           <MoviesList
             films={films}
             listSize={MOVIES_LIST_SIZE}
-            redirectToPath={redirectToPath}
           />
         </section>
 
@@ -88,7 +86,7 @@ Main.propTypes = {
   loadMovies: PropTypes.func,
   loadPromo: PropTypes.func,
   isDataLoaded: PropTypes.object,
-  redirectToPath: PropTypes.func,
+  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -107,6 +105,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadPromo() {
     dispatch(fetchPromo());
+  },
+  redirectToRoute(path) {
+    dispatch(ActionCreator.redirectToRoute(path));
   },
 });
 

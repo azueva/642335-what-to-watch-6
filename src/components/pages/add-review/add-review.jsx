@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 import CommentForm from '../../blocks/comment-form/comment-form';
@@ -7,7 +8,7 @@ import CommentForm from '../../blocks/comment-form/comment-form';
 const AddReview = (props) => {
   const {film} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, rating} = film;
-  const {redirectToPath, redirectToPrevPage} = props;
+  const {redirectToPrevPage} = props;
 
   return (
     <section className="movie-card movie-card--full"
@@ -20,9 +21,7 @@ const AddReview = (props) => {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <Header
-          onAvatarClick={redirectToPath}
-        >
+        <Header>
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
@@ -52,8 +51,7 @@ const AddReview = (props) => {
 
 AddReview.propTypes = {
   film: MovieProp.isRequired,
-  redirectToPath: MovieProp.func,
-  redirectToPrevPage: MovieProp.func,
+  redirectToPrevPage: PropTypes.func,
 };
 
 export default AddReview;

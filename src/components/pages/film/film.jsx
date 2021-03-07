@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
 import {fetchComments} from "../../../store/api-action";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
@@ -14,15 +15,15 @@ import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 const Film = (props) => {
   const {film, films, reviews, loadComments} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
-  const {redirectToPath} = props;
+  const {redirectToRoute} = props;
 
   useEffect(() => {
     loadComments(id);
   }, [film]);
 
-  // const handlePlayBtnClick = () => {
-  //   history.push(`/player/${id}`);
-  // };
+  const handlePlayBtnClick = () => {
+    redirectToRoute(`/player/${id}`);
+  };
 
   return (
     <React.Fragment>
@@ -38,7 +39,6 @@ const Film = (props) => {
 
           <Header
             modificator="movie-card__head"
-            onAvatarClick={redirectToPath}
           />
 
           <div className="movie-card__wrap">
@@ -51,7 +51,7 @@ const Film = (props) => {
 
               <div className="movie-card__buttons">
                 <button className="btn btn--play movie-card__button" type="button"
-                  onClick={() => redirectToPath(`/player/${id}`)}
+                  onClick={handlePlayBtnClick}
                 >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
@@ -95,7 +95,6 @@ const Film = (props) => {
           <MoviesList
             films={films.filter((el) => el.genre === genre)
             .slice(0, EXTRA_MOVIES_LIST_SIZE)}
-            redirectToPath={redirectToPath}
           />
         </section>
 
@@ -110,7 +109,7 @@ Film.propTypes = {
   film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
   loadComments: PropTypes.func,
-  redirectToPath: PropTypes.func,
+  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -120,6 +119,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadComments(movieId) {
     dispatch(fetchComments(movieId));
+  },
+  redirectToRoute(path) {
+    dispatch(ActionCreator.redirectToRoute(path));
   },
 });
 

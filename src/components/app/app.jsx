@@ -21,11 +21,9 @@ const App = (props) => {
     <BrowserRouter history={browserHistory}>
       <Switch>
 
-        <Route exact path="/"
-          render={({history}) => (
-            <Main redirectToPath={history.push} />
-          )}
-        />
+        <Route exact path="/">
+          <Main />
+        </Route>
 
         <Route exact path="/login">
           <SignIn />
@@ -37,13 +35,12 @@ const App = (props) => {
         />
 
         <Route exact path="/films/:id"
-          render={({match, history}) => {
+          render={({match}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <Film
                 film={film}
                 films={films}
-                redirectToPath={history.push}
               /> :
               <NotFound />;
           }}
@@ -56,8 +53,7 @@ const App = (props) => {
             return film ?
               <AddReview
                 film={film}
-                redirectToPrevPage={() => history.go(-1)}
-                redirectToPath={history.push}
+                redirectToPrevPage={history.goBack}
               /> :
               <NotFound />;
           }}
@@ -72,7 +68,7 @@ const App = (props) => {
                 name={film.name}
                 videoLink={film.videoLink}
                 runTime={film.runTime}
-                redirectToPrevPage={() => history.go(-1)}
+                redirectToPrevPage={history.goBack}
               /> :
               <NotFound />;
           }}

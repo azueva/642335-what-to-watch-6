@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
 import Logo from "../logo/logo";
 import {AuthorizationStatus, ApiPaths} from "../../../const";
 
@@ -10,10 +11,6 @@ const Header = (props) => {
   const {modificator = ``, isShowUserBlock = true, authorizationStatus} = props;
   const {onAvatarClick} = props;
 
-  // const handleAvatarClick = () => {
-  //   history.push(`/mylist`);
-  // };
-
   return (
     <header className={`page-header ${modificator}`}>
       <Logo />
@@ -21,14 +18,16 @@ const Header = (props) => {
 
       {isShowUserBlock && (
         <div className="user-block">
+
           {authorizationStatus === AuthorizationStatus.AUTH ? (
             <div className="user-block__avatar">
               <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"
-                onClick={() => onAvatarClick(`/mylist`)}
+                onClick={onAvatarClick}
               />
             </div>
           ) : <Link to={ApiPaths.LOGIN} className="user-block__link">Sign in</Link>
           }
+
         </div>
       )}
     </header>
@@ -47,5 +46,12 @@ const mapStateToProps = (state) => ({
   authorizationStatus: state.authorizationStatus,
 });
 
+
+const mapDispatchToProps = (dispatch) => ({
+  onAvatarClick() {
+    dispatch(ActionCreator.redirectToRoute(`/mylist`));
+  },
+});
+
 export {Header};
-export default connect(mapStateToProps, null)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

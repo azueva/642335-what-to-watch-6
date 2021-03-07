@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {ApiPaths} from "../const";
+import {ApiPaths, AuthorizationStatus} from "../const";
 import {adapter} from "../utils";
 
 export const fetchMovies = () => (dispatch, _getState, api) => (
@@ -15,4 +15,17 @@ export const fetchPromo = () => (dispatch, _getState, api) => (
 export const fetchComments = (id) => (dispatch, _getState, api) => (
   api.get(`${ApiPaths.COMMENTS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data.map(adapter.rawToComment))))
+);
+
+export const checkAuth = () => (dispatch, _getState, api) => (
+  api.get(ApiPaths.LOGIN)
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .catch(() => {})
+);
+
+export const login = ({login: email, password}) => (dispatch, _getState, api) => (
+  api.post(ApiPaths.LOGIN, {email, password})
+    .then((response) => dispatch(ActionCreator.getUserInfo(response.data)))
+    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(ActionCreator.redirectToRoute(`/`)))
 );

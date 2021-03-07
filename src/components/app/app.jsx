@@ -1,7 +1,9 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
+import browserHistory from "../../browser-history";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import PrivateRoute from '../private-route/private-route';
 import Main from '../pages/main/main';
 import SignIn from '../pages/sign-in/sign-in';
 import MyList from '../pages/my-list/my-list';
@@ -16,7 +18,7 @@ const App = (props) => {
   const {films} = props;
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
 
         <Route exact path="/">
@@ -27,9 +29,10 @@ const App = (props) => {
           <SignIn />
         </Route>
 
-        <Route exact path="/mylist">
-          <MyList />
-        </Route>
+        <PrivateRoute exact
+          path="/mylist"
+          render={() => <MyList />}
+        />
 
         <Route exact path="/films/:id"
           render={({match}) => {
@@ -43,19 +46,21 @@ const App = (props) => {
           }}
         />
 
-        <Route exact path="/films/:id/review"
-          render={({match}) => {
+        <PrivateRoute exact
+          path="/films/:id/review"
+          render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <AddReview
                 film={film}
+                redirectToPrevPage={history.goBack}
               /> :
               <NotFound />;
           }}
         />
 
         <Route exact path="/player/:id"
-          render={({match}) => {
+          render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
               <Player
@@ -63,6 +68,7 @@ const App = (props) => {
                 name={film.name}
                 videoLink={film.videoLink}
                 runTime={film.runTime}
+                redirectToPrevPage={history.goBack}
               /> :
               <NotFound />;
           }}
@@ -87,4 +93,4 @@ const mapStateToProps = (state) => ({
 });
 
 export {MyList};
-export default connect(mapStateToProps, null)(App);
+export default connect(mapStateToProps)(App);

@@ -8,7 +8,7 @@ const LoadingScreen = () => {
     <div className="user-page">
       <Header
         modificator="user-page__head"
-        isShowUser={false}
+        isShowUserBlock={false}
       >
         <h1 className="page-title user-page__title">Loading ...</h1>
       </Header>

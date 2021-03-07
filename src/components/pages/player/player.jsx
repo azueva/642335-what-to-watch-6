@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import React, {useState, useEffect} from "react";
-import {useHistory} from "react-router-dom";
 import VideoPlayer from "../../video-player/video-player-fs";
 import PropTypes from 'prop-types';
 import {formatMinToTimeString} from '../../../utils';
@@ -23,7 +22,7 @@ const Player = (props) => {
   const [playerStatus, setPlayerStatus] = useState(null);
   const [playButtonState, setPlayButtonState] = useState(PlayButtonState.PLAY);
   const [fullScreenButtonClick, setFullScreenButtonClick] = useState(null);
-  const history = useHistory();
+  const {redirectToPrevPage} = props;
 
   /* componentDidMount */
   useEffect(() => {
@@ -32,7 +31,7 @@ const Player = (props) => {
 
 
   const handleExitBtnClick = () => {
-    history.goBack();
+    redirectToPrevPage();
   };
 
   const handlePlayerStatusChange = (status) => {
@@ -136,6 +135,7 @@ Player.propTypes = {
   name: PropTypes.string.isRequired,
   videoLink: PropTypes.string.isRequired,
   runTime: PropTypes.number.isRequired,
+  redirectToPrevPage: PropTypes.func,
 };
 
 export default Player;

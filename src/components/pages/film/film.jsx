@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
 import {fetchComments} from "../../../store/api-action";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
@@ -11,16 +12,17 @@ import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
 import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 
-const Film = ({film, films, reviews, loadComments}) => {
+const Film = (props) => {
+  const {film, films, reviews, loadComments} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
-  const history = useHistory();
+  const {redirectToRoute} = props;
 
   useEffect(() => {
     loadComments(id);
   }, [film]);
 
   const handlePlayBtnClick = () => {
-    history.push(`/player/${id}`);
+    redirectToRoute(`/player/${id}`);
   };
 
   return (
@@ -91,8 +93,8 @@ const Film = ({film, films, reviews, loadComments}) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={films.filter((el) => el.genre === genre)}
-            listSize={EXTRA_MOVIES_LIST_SIZE}
+            films={films.filter((el) => el.genre === genre)
+            .slice(0, EXTRA_MOVIES_LIST_SIZE)}
           />
         </section>
 
@@ -107,6 +109,7 @@ Film.propTypes = {
   film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
   loadComments: PropTypes.func,
+  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -116,6 +119,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadComments(movieId) {
     dispatch(fetchComments(movieId));
+  },
+  redirectToRoute(path) {
+    dispatch(ActionCreator.redirectToRoute(path));
   },
 });
 

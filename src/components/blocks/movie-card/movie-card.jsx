@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {connect} from 'react-redux';
+import {ActionCreator} from '../../../store/action';
+import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import VideoPlayer from "../../video-player/video-player";
 import {VIDEO_TIMEOUT, VideoStatus} from "../../../const";
 
-const MovieCard = ({film, onHover}) => {
+const MovieCard = (props) => {
+  const {film, onHover} = props;
   const {id, name, previewImage, previewVideoPoster, previewVideoLink} = film;
-  const history = useHistory();
+  const {redirectToRoute} = props;
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const [timer, setTimer] = useState(null);
 
@@ -24,7 +27,7 @@ const MovieCard = ({film, onHover}) => {
   };
 
   const handleCardClick = () => {
-    history.push(`/films/${id}`);
+    redirectToRoute(`/films/${id}`);
   };
 
   const handlePlayerStatusChange = (status) => {
@@ -76,8 +79,19 @@ const MovieCard = ({film, onHover}) => {
   );
 };
 
+
 MovieCard.propTypes = {
   film: MovieProp.isRequired,
   onHover: PropTypes.func.isRequired,
+  redirectToRoute: PropTypes.func,
 };
-export default MovieCard;
+
+
+const mapDispatchToProps = (dispatch) => ({
+  redirectToRoute(path) {
+    dispatch(ActionCreator.redirectToRoute(path));
+  },
+});
+
+export {MovieCard};
+export default connect(null, mapDispatchToProps)(MovieCard);

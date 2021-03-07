@@ -5,6 +5,9 @@ export const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  GET_USER_INFO: `GET_USER_INFO`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
 };
 
 export const ActionCreator = {
@@ -31,5 +34,20 @@ export const ActionCreator = {
   loadComments: (payload) => ({
     type: ActionType.LOAD_COMMENTS,
     payload,
+  }),
+
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
+  }),
+
+  getUserInfo: (userInfo) => ({
+    type: ActionType.GET_USER_INFO,
+    payload: userInfo,
+  }),
+
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
   }),
 };

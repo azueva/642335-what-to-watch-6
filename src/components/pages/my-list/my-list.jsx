@@ -7,8 +7,8 @@ import Footer from '../../blocks/footer/footer';
 import MovieProp from '../../props/movie.prop';
 import {MOVIES_LIST_SIZE} from "../../../const";
 
-const MyList = ({films}) => {
-
+const MyList = (props) => {
+  const {films} = props;
   return (
     <div className="user-page">
       <Header

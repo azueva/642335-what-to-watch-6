@@ -1,11 +1,14 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 import CommentForm from '../../blocks/comment-form/comment-form';
 
-const AddReview = ({film}) => {
+const AddReview = (props) => {
+  const {film} = props;
   const {id, name, posterImage, backgroundImage, backgroundColor, rating} = film;
+  const {redirectToPrevPage} = props;
 
   return (
     <section className="movie-card movie-card--full"
@@ -39,6 +42,7 @@ const AddReview = ({film}) => {
       <div className="add-review">
         <CommentForm
           rating={rating}
+          redirectToPrevPage={redirectToPrevPage}
         />
       </div>
     </section>
@@ -47,6 +51,7 @@ const AddReview = ({film}) => {
 
 AddReview.propTypes = {
   film: MovieProp.isRequired,
+  redirectToPrevPage: PropTypes.func,
 };
 
 export default AddReview;

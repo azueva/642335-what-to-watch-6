@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {useHistory} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import {fetchMovies, fetchPromo} from "../../../store/api-action";
@@ -15,7 +14,7 @@ import {getFilmsByGenre} from "../../../store/selectors";
 
 const Main = (props) => {
   const {films = [], promo, loadMovies, loadPromo, resetPage, isDataLoaded} = props;
-  const history = useHistory();
+  const {redirectToRoute} = props;
 
   useEffect(() => {
     /* componentDidMount */
@@ -38,12 +37,14 @@ const Main = (props) => {
   }
 
   const handlePlayBtnClick = () => {
-    history.push(`/player/${promo.id}`);
+    redirectToRoute(`/player/${promo.id}`);
   };
 
   return (
     <React.Fragment>
-      <Promo promo={promo}>
+      <Promo
+        promo={promo}
+      >
         <div className="movie-card__buttons">
           <button className="btn btn--play movie-card__button" type="button"
             onClick={handlePlayBtnClick}
@@ -85,6 +86,7 @@ Main.propTypes = {
   loadMovies: PropTypes.func,
   loadPromo: PropTypes.func,
   isDataLoaded: PropTypes.object,
+  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -103,6 +105,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadPromo() {
     dispatch(fetchPromo());
+  },
+  redirectToRoute(path) {
+    dispatch(ActionCreator.redirectToRoute(path));
   },
 });
 

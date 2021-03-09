@@ -36,10 +36,19 @@ export const RatingLimits = {
   AWESOME: 10,
 };
 
-export const ApiPaths = {
+export const AppRoute = {
+  ROOT: `/`,
+  LOGIN: `/login`,
+  FAVORITES: `/mylist`,
+  FILM: `/films`,
+  ADD_COMMENT: `/review`,
+  PLAYER: `/player`,
+  NOT_FOUND: `/404`,
+};
+
+export const APIRoute = {
   FILMS: `/films`,
   PROMO: `/films/promo`,
-  FAVORITE: `/favorite`,
   COMMENTS: `/comments`,
   LOGIN: `/login`,
   LOGOUT: `/logout`,

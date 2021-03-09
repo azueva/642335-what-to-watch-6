@@ -10,7 +10,7 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
-import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
+import {EXTRA_MOVIES_LIST_SIZE, AppRoute} from "../../../const";
 
 const Film = (props) => {
   const {film, films, reviews, loadComments} = props;
@@ -22,7 +22,7 @@ const Film = (props) => {
   }, [film]);
 
   const handlePlayBtnClick = () => {
-    redirectToRoute(`/player/${id}`);
+    redirectToRoute(`${AppRoute.PLAYER}/${id}`);
   };
 
   return (
@@ -65,7 +65,7 @@ const Film = (props) => {
                   <span>My list</span>
                 </button>
 
-                <Link className="btn movie-card__button" to={`/films/${id}/review`}>
+                <Link className="btn movie-card__button" to={`${AppRoute.FILM}/${id}${AppRoute.ADD_COMMENT}`}>
                   Add review
                 </Link>
 

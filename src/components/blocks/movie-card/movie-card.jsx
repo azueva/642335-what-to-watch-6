@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import VideoPlayer from "../../video-player/video-player";
-import {VIDEO_TIMEOUT, VideoStatus} from "../../../const";
+import {VIDEO_TIMEOUT, VideoStatus, AppRoute} from "../../../const";
 
 const MovieCard = (props) => {
   const {film, onHover} = props;
@@ -27,7 +27,7 @@ const MovieCard = (props) => {
   };
 
   const handleCardClick = () => {
-    redirectToRoute(`/films/${id}`);
+    redirectToRoute(`${AppRoute.FILM}/${id}`);
   };
 
   const handlePlayerStatusChange = (status) => {
@@ -71,7 +71,7 @@ const MovieCard = (props) => {
         }
       </div>
       <h3 className="small-movie-card__title">
-        <Link className="small-movie-card__link" to={`/films/${id}`}>
+        <Link className="small-movie-card__link" to={`${AppRoute.FILM}/${id}`}>
           {name}
         </Link>
       </h3>

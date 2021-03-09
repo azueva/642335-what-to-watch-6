@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import Logo from "../logo/logo";
-import {AuthorizationStatus, ApiPaths} from "../../../const";
+import {AuthorizationStatus, AppRoute} from "../../../const";
 
 
 const Header = (props) => {
@@ -25,7 +25,7 @@ const Header = (props) => {
                 onClick={onAvatarClick}
               />
             </div>
-          ) : <Link to={ApiPaths.LOGIN} className="user-block__link">Sign in</Link>
+          ) : <Link to={AppRoute.LOGIN} className="user-block__link">Sign in</Link>
           }
 
         </div>

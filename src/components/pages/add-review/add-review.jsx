@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import Header from '../../blocks/header/header';
 import CommentForm from '../../blocks/comment-form/comment-form';
+import {AppRoute} from "../../../const";
 
 const AddReview = (props) => {
   const {film} = props;
@@ -25,7 +26,7 @@ const AddReview = (props) => {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
+                <Link to={`${AppRoute.FILM}/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <Link to="#" className="breadcrumbs__link">Add review</Link>

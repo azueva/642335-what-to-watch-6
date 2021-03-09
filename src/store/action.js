@@ -4,6 +4,7 @@ export const ActionType = {
   CHANGE_GENRE: `CHANGE_GENRE`,
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
+  LOAD_MOVIE: `LOAD_MOVIE`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   GET_USER_INFO: `GET_USER_INFO`,
@@ -23,6 +24,11 @@ export const ActionCreator = {
 
   loadMovies: (payload) => ({
     type: ActionType.LOAD_MOVIES,
+    payload,
+  }),
+
+  loadMovie: (payload) => ({
+    type: ActionType.LOAD_MOVIE,
     payload,
   }),
 

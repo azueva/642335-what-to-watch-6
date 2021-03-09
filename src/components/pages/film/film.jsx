@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
-import {fetchComments} from "../../../store/api-action";
+import {fetchMovie, fetchComments, fetchMovies} from "../../../store/api-action";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import ReviewProp from '../../props/review.prop';
@@ -10,16 +10,28 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
+import LoadingScreen from '../loading-screen/loading-screen';
 import {EXTRA_MOVIES_LIST_SIZE, AppRoute} from "../../../const";
+import {getFilmsByGenre} from "../../../store/selectors";
 
 const Film = (props) => {
-  const {film, films, reviews, loadComments} = props;
-  const {id, name, posterImage, backgroundImage, backgroundColor, genre, released} = film;
+  const {filmId, films, reviews, film, loadMovie, isDataLoaded} = props;
   const {redirectToRoute} = props;
 
   useEffect(() => {
-    loadComments(id);
-  }, [film]);
+    loadMovie(filmId);
+    return () => {
+      isDataLoaded.film = false;
+    };
+  }, [filmId]);
+
+  if (!isDataLoaded.film) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
+  const {id, name, posterImage, backgroundImage, backgroundColor, genre = ``, released} = film;
 
   const handlePlayBtnClick = () => {
     redirectToRoute(`${AppRoute.PLAYER}/${id}`);
@@ -105,15 +117,20 @@ const Film = (props) => {
 };
 
 Film.propTypes = {
+  filmId: PropTypes.number,
+  isDataLoaded: PropTypes.object,
   films: PropTypes.arrayOf(MovieProp).isRequired,
-  film: MovieProp.isRequired,
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
-  loadComments: PropTypes.func,
+  film: MovieProp.isRequired,
+  loadMovie: PropTypes.func,
   redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
+  film: state.film,
   reviews: state.reviews,
+  films: getFilmsByGenre(state.genre, state.films),
+  isDataLoaded: state.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -122,6 +139,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   redirectToRoute(path) {
     dispatch(ActionCreator.redirectToRoute(path));
+  },
+  loadMovie(movieId) {
+    dispatch(fetchMovie(movieId));
+  },
+  loadMovies() {
+    dispatch(fetchMovies());
   },
 });
 

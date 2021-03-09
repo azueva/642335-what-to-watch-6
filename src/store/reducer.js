@@ -5,7 +5,8 @@ const initialState = {
   genre: ALL_GENRES,
   films: [],
   promo: {},
-  isDataLoaded: {films: false, promo: false},
+  film: {},
+  isDataLoaded: {films: false, promo: false, film: false},
   reviews: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   user: null,
@@ -31,6 +32,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         promo: action.payload,
         isDataLoaded: {...state.isDataLoaded, promo: true}
+      };
+
+    case ActionType.LOAD_MOVIE:
+      return {
+        ...state,
+        film: action.payload,
+        isDataLoaded: {...state.isDataLoaded, film: true}
       };
 
     case ActionType.LOAD_COMMENTS:

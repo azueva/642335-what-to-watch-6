@@ -29,3 +29,14 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
 );
+
+export const fetchMovie = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.FILMS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadMovie(adapter.rawToFilm(data))))
+    .then((data) => {
+      const currentFilm = data.payload;
+      return dispatch(ActionCreator.changeGenre(currentFilm.genre));
+    })
+    .then(() => dispatch(fetchComments(id)))
+    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+);

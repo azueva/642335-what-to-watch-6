@@ -37,13 +37,12 @@ const App = (props) => {
 
         <Route exact path={`${AppRoute.FILM}/:id`}
           render={({match}) => {
-            const film = getFilmById(match.params.id, films);
-            return film ?
+            const filmId = match.params.id;
+            return (
               <Film
-                film={film}
+                filmId={parseInt(filmId, 10)}
                 films={films}
-              /> :
-              <NotFound />;
+              />);
           }}
         />
 

@@ -40,3 +40,8 @@ export const fetchMovie = (id) => (dispatch, _getState, api) => (
     .then(() => dispatch(fetchComments(id)))
     .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
+
+export const uploadComment = (id, {rating, comment}) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.COMMENTS}/${id}`, {rating, comment})
+    .then((data) => dispatch(ActionCreator.loadComments(data.map(adapter.rawToComment))))
+);

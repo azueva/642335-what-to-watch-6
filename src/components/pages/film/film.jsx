@@ -10,6 +10,7 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
+import AddReviewButton from '../../blocks/add-review-button/add-review-button';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {EXTRA_MOVIES_LIST_SIZE, AppRoute} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
@@ -77,9 +78,9 @@ const Film = (props) => {
                   <span>My list</span>
                 </button>
 
-                <Link className="btn movie-card__button" to={`${AppRoute.FILM}/${id}${AppRoute.ADD_COMMENT}`}>
-                  Add review
-                </Link>
+                <AddReviewButton
+                  link={`${AppRoute.FILM}/${id}${AppRoute.ADD_COMMENT}`}
+                />
 
               </div>
             </div>
@@ -105,7 +106,7 @@ const Film = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={films.filter((el) => el.genre === genre)
+            films={films.filter((el) => el.id !== +filmId)
             .slice(0, EXTRA_MOVIES_LIST_SIZE)}
           />
         </section>

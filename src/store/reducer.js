@@ -7,6 +7,7 @@ const initialState = {
   promo: {},
   film: {},
   isDataLoaded: {films: false, promo: false, film: false},
+  isReviewUploading: false,
   reviews: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
   user: null,
@@ -39,6 +40,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         film: action.payload,
         isDataLoaded: {...state.isDataLoaded, film: true}
+      };
+
+    case ActionType.START_COMMENT_UPLOAD:
+      return {
+        ...state,
+        isReviewUploading: true,
+      };
+
+    case ActionType.END_COMMENT_UPLOAD:
+      return {
+        ...state,
+        isReviewUploading: false,
       };
 
     case ActionType.LOAD_COMMENTS:

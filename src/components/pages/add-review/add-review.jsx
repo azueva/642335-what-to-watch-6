@@ -13,8 +13,6 @@ import {AppRoute} from "../../../const";
 const AddReview = (props) => {
   const {filmId, film, loadMovie, writeComment, isDataLoaded} = props;
 
-  const {redirectToPrevPage} = props;
-
   useEffect(() => {
     loadMovie(filmId);
     return () => {
@@ -28,7 +26,7 @@ const AddReview = (props) => {
     );
   }
 
-  const {id, name, posterImage, backgroundImage, backgroundColor, rating} = film;
+  const {id, name, posterImage, backgroundImage, backgroundColor} = film;
 
   const postComment = (commentPost) => {
     writeComment(filmId, commentPost);
@@ -65,8 +63,6 @@ const AddReview = (props) => {
 
       <div className="add-review">
         <CommentForm
-          rating={rating}
-          redirectToPrevPage={redirectToPrevPage}
           postComment={postComment}
         />
       </div>
@@ -80,7 +76,6 @@ AddReview.propTypes = {
   filmId: PropTypes.number.isRequired,
   loadMovie: PropTypes.func,
   writeComment: PropTypes.func,
-  redirectToPrevPage: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({

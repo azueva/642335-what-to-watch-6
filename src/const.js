@@ -6,18 +6,21 @@ export const EXTRA_MOVIES_LIST_SIZE = 4;
 
 export const TabNames = [`Overview`, `Details`, `Reviews`];
 
-export const MAX_RATING = 10;
-
-export const FieldsNames = {
-  rating: `stars`,
-  [`review-text`]: `comment`,
-};
-
 export const VIDEO_TIMEOUT = 1000;
 
 export const VideoStatus = {
   ENDED: `ended`,
   ERROR: `error`,
+};
+
+export const MAX_RATING = 10;
+
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 400;
+
+export const CommentFieldsNames = {
+  rating: `rating`,
+  [`review-text`]: `comment`,
 };
 
 export const RatingNames = {

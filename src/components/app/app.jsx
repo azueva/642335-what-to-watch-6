@@ -47,12 +47,11 @@ const App = (props) => {
         />
 
         <PrivateRoute exact path={`${AppRoute.FILM}/:id${AppRoute.ADD_COMMENT}`}
-          render={({match, history}) => {
+          render={({match}) => {
             const filmId = match.params.id;
             return (
               <AddReview
                 filmId={parseInt(filmId, 10)}
-                redirectToPrevPage={history.goBack}
               />);
           }}
         />

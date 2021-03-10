@@ -5,6 +5,8 @@ export const ActionType = {
   LOAD_MOVIES: `LOAD_MOVIES`,
   LOAD_PROMO: `LOAD_PROMO`,
   LOAD_MOVIE: `LOAD_MOVIE`,
+  START_COMMENT_UPLOAD: `START_COMMENT_UPLOAD`,
+  END_COMMENT_UPLOAD: `END_COMMENT_UPLOAD`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   GET_USER_INFO: `GET_USER_INFO`,
@@ -40,6 +42,14 @@ export const ActionCreator = {
   loadComments: (payload) => ({
     type: ActionType.LOAD_COMMENTS,
     payload,
+  }),
+
+  startCommentUpload: () => ({
+    type: ActionType.START_COMMENT_UPLOAD,
+  }),
+
+  endCommentUpload: () => ({
+    type: ActionType.END_COMMENT_UPLOAD,
   }),
 
   requireAuthorization: (status) => ({

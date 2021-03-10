@@ -1,5 +1,4 @@
 import React, {useEffect} from "react";
-import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import {fetchMovie, fetchComments, fetchMovies} from "../../../store/api-action";

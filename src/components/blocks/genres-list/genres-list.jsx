@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {ActionCreator} from '../../../store/action';
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
-import {ALL_GENRES, GENRES_LIST_SIZE} from "../../../const";
+import {ALL_GENRES, GENRES_LIST_SIZE, AppRoute} from "../../../const";
 
 const createGenreList = (summaryItem, filmsList) => [summaryItem]
   .concat([...new Set(filmsList.map((film) => film.genre))].sort());
@@ -25,7 +25,7 @@ const GenresList = (props) => {
               key={genre}
               onClick={() => onGenreItemClick(genre)}
             >
-              <Link to="/" className="catalog__genres-link">{genre}</Link>
+              <Link to={AppRoute.ROOT} className="catalog__genres-link">{genre}</Link>
             </li>
           )
         )

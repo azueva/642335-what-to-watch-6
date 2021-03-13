@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
+import {AppRoute} from "../../../const";
 
 const NotFound = () => {
 
@@ -15,7 +16,7 @@ const NotFound = () => {
       </Header>
 
       <div className="page__content">
-        <Link to="/">
+        <Link to={AppRoute.ROOT}>
           <p>Вернуться на главную</p>
         </Link>
       </div>

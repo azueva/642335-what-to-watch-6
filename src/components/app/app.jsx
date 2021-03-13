@@ -12,6 +12,7 @@ import AddReview from '../pages/add-review/add-review';
 import Player from '../pages/player/player';
 import NotFound from '../pages/not-found/not-found';
 import MovieProp from '../props/movie.prop';
+import {AppRoute} from "../../const";
 import {getFilmById} from "../../utils";
 
 const App = (props) => {
@@ -21,45 +22,41 @@ const App = (props) => {
     <BrowserRouter history={browserHistory}>
       <Switch>
 
-        <Route exact path="/">
+        <Route exact path={AppRoute.ROOT}>
           <Main />
         </Route>
 
-        <Route exact path="/login">
+        <Route exact path={AppRoute.LOGIN}>
           <SignIn />
         </Route>
 
         <PrivateRoute exact
-          path="/mylist"
+          path={AppRoute.FAVORITES}
           render={() => <MyList />}
         />
 
-        <Route exact path="/films/:id"
+        <Route exact path={`${AppRoute.FILM}/:id`}
           render={({match}) => {
-            const film = getFilmById(match.params.id, films);
-            return film ?
+            const filmId = match.params.id;
+            return (
               <Film
-                film={film}
+                filmId={parseInt(filmId, 10)}
                 films={films}
-              /> :
-              <NotFound />;
+              />);
           }}
         />
 
-        <PrivateRoute exact
-          path="/films/:id/review"
-          render={({match, history}) => {
-            const film = getFilmById(match.params.id, films);
-            return film ?
+        <PrivateRoute exact path={`${AppRoute.FILM}/:id${AppRoute.ADD_COMMENT}`}
+          render={({match}) => {
+            const filmId = match.params.id;
+            return (
               <AddReview
-                film={film}
-                redirectToPrevPage={history.goBack}
-              /> :
-              <NotFound />;
+                filmId={parseInt(filmId, 10)}
+              />);
           }}
         />
 
-        <Route exact path="/player/:id"
+        <Route exact path={`${AppRoute.PLAYER}/:id`}
           render={({match, history}) => {
             const film = getFilmById(match.params.id, films);
             return film ?
@@ -73,6 +70,10 @@ const App = (props) => {
               <NotFound />;
           }}
         />
+
+        <Route exact path={AppRoute.NOT_FOUND}>
+          <NotFound />
+        </Route>
 
         <Route>
           <NotFound />

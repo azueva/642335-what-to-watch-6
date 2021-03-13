@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
 import {fetchMovie, fetchComments, fetchMovies} from "../../../store/api-action";
 import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
@@ -9,14 +8,14 @@ import MoviesList from '../../blocks/movies-list/movies-list';
 import Header from '../../blocks/header/header';
 import Footer from '../../blocks/footer/footer';
 import Tabs from '../../blocks/tabs/tabs';
+import MovieBannerButtonList from '../../blocks/movie-banner-button-list/movie-banner-button-list';
 import AddReviewButton from '../../blocks/add-review-button/add-review-button';
 import LoadingScreen from '../loading-screen/loading-screen';
-import {EXTRA_MOVIES_LIST_SIZE, AppRoute} from "../../../const";
+import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
 
 const Film = (props) => {
   const {filmId, films, reviews, film, loadMovie, isDataLoaded} = props;
-  const {redirectToRoute} = props;
 
   useEffect(() => {
     loadMovie(filmId);
@@ -32,10 +31,6 @@ const Film = (props) => {
   }
 
   const {id, name, posterImage, backgroundImage, backgroundColor, genre = ``, released} = film;
-
-  const handlePlayBtnClick = () => {
-    redirectToRoute(`${AppRoute.PLAYER}/${id}`);
-  };
 
   return (
     <React.Fragment>
@@ -61,27 +56,13 @@ const Film = (props) => {
                 <span className="movie-card__year">{released}</span>
               </p>
 
-              <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" type="button"
-                  onClick={handlePlayBtnClick}
-                >
-                  <svg viewBox="0 0 19 19" width="19" height="19">
-                    <use xlinkHref="#play-s"></use>
-                  </svg>
-                  <span>Play</span>
-                </button>
-                <button className="btn btn--list movie-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+              <MovieBannerButtonList id={id}>
 
-                <AddReviewButton
-                  link={`${AppRoute.FILM}/${id}${AppRoute.ADD_COMMENT}`}
-                />
+                <AddReviewButton id={id} />
 
-              </div>
+              </MovieBannerButtonList>
+
+
             </div>
           </div>
         </div>
@@ -123,7 +104,6 @@ Film.propTypes = {
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
   film: MovieProp.isRequired,
   loadMovie: PropTypes.func,
-  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -136,9 +116,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   loadComments(movieId) {
     dispatch(fetchComments(movieId));
-  },
-  redirectToRoute(path) {
-    dispatch(ActionCreator.redirectToRoute(path));
   },
   loadMovie(movieId) {
     dispatch(fetchMovie(movieId));

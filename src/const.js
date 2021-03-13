@@ -55,6 +55,7 @@ export const APIRoute = {
   COMMENTS: `/comments`,
   LOGIN: `/login`,
   LOGOUT: `/logout`,
+  FAVORITE: `/favorite`,
 };
 
 export const BACKEND_URL = `https://6.react.pages.academy/wtw`;
@@ -69,4 +70,9 @@ export const HttpCode = {
 export const AuthorizationStatus = {
   AUTH: `AUTH`,
   NO_AUTH: `NO_AUTH`,
+};
+
+export const FavoriteStatus = {
+  ON: 1,
+  OFF: 0,
 };

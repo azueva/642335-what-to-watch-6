@@ -50,3 +50,11 @@ export const uploadComment = (id, {rating, comment}) => (dispatch, _getState, ap
     .then(() => dispatch(ActionCreator.redirectToRoute(`${AppRoute.FILM}/${id}`)))
     .finally(dispatch(ActionCreator.endCommentUpload()))
 );
+
+export const addToFavorite = (id) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/1`)
+);
+
+export const removeToFavorite = (id) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/0`)
+);

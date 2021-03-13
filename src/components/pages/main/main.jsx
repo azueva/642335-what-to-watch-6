@@ -7,6 +7,7 @@ import MovieProp from '../../props/movie.prop';
 import GenresList from '../../blocks/genres-list/genres-list';
 import MoviesList from '../../blocks/movies-list/movies-list';
 import Promo from '../../blocks/promo/promo';
+import MovieBannerButtonList from '../../blocks/movie-banner-button-list/movie-banner-button-list';
 import Footer from '../../blocks/footer/footer';
 import LoadingScreen from '../loading-screen/loading-screen';
 import {MOVIES_LIST_SIZE} from "../../../const";
@@ -14,7 +15,6 @@ import {getFilmsByGenre} from "../../../store/selectors";
 
 const Main = (props) => {
   const {films = [], promo, loadMovies, loadPromo, resetPage, isDataLoaded} = props;
-  const {redirectToRoute} = props;
 
   useEffect(() => {
     /* componentDidMount */
@@ -36,31 +36,15 @@ const Main = (props) => {
     );
   }
 
-  const handlePlayBtnClick = () => {
-    redirectToRoute(`/player/${promo.id}`);
-  };
-
   return (
     <React.Fragment>
       <Promo
         promo={promo}
       >
-        <div className="movie-card__buttons">
-          <button className="btn btn--play movie-card__button" type="button"
-            onClick={handlePlayBtnClick}
-          >
-            <svg viewBox="0 0 19 19" width="19" height="19">
-              <use xlinkHref="#play-s"></use>
-            </svg>
-            <span>Play</span>
-          </button>
-          <button className="btn btn--list movie-card__button" type="button">
-            <svg viewBox="0 0 19 20" width="19" height="20">
-              <use xlinkHref="#add"></use>
-            </svg>
-            <span>My list</span>
-          </button>
-        </div>
+        <MovieBannerButtonList
+          id={promo.id}
+        />
+
       </Promo>
 
       <div className="page-content">
@@ -86,7 +70,6 @@ Main.propTypes = {
   loadMovies: PropTypes.func,
   loadPromo: PropTypes.func,
   isDataLoaded: PropTypes.object,
-  redirectToRoute: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
@@ -105,9 +88,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   loadPromo() {
     dispatch(fetchPromo());
-  },
-  redirectToRoute(path) {
-    dispatch(ActionCreator.redirectToRoute(path));
   },
 });
 

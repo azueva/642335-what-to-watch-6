@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import ReviewProp from '../../props/review.prop';
-import {formatDateToString} from "../../../utils";
+import ReviewProp from '../../../props/review.prop';
+import {formatDateToString} from "../../../../utils";
 
 const getReviewMarkup = (review) => {
   const {id, user, rating, comment, date} = review;

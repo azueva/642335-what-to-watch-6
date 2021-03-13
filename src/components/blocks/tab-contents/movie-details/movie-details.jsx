@@ -1,6 +1,6 @@
 import React from "react";
-import MovieProp from '../../props/movie.prop';
-import {joinComponents, formatMinToHours} from "../../../utils";
+import MovieProp from '../../../props/movie.prop';
+import {joinComponents, formatMinToHours} from "../../../../utils";
 
 const MovieDetails = ({film}) => {
   const {director, starring, runTime, genre, released} = film;

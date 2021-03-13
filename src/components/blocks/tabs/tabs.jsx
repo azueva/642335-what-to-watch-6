@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import MovieProp from '../../props/movie.prop';
 import ReviewProp from '../../props/review.prop';
 import TabsList from '../tabs-list/tabs-list';
-import MovieOverview from '../movie-overview/movie-overview';
-import MovieDetails from '../movie-details/movie-details';
-import MovieReviews from '../movie-reviews/movie-reviews';
+import MovieOverview from '../tab-contents/movie-overview/movie-overview';
+import MovieDetails from '../tab-contents/movie-details/movie-details';
+import MovieReviews from '../tab-contents/movie-reviews/movie-reviews';
 import {TabNames} from "../../../const";
 
 const defaultActiveTab = TabNames[0];

@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
+import React from "react";
+import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
+import {createStore, applyMiddleware} from "redux";
+import {Provider} from "react-redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import {createAPI} from "./api";
-import {ActionCreator} from './store/action';
+import {ActionCreator} from "./store/action";
 import {checkAuth} from "./store/api-action";
-import {Provider} from 'react-redux';
-import {reducer} from './store/reducer';
-import {composeWithDevTools} from 'redux-devtools-extension';
-import App from './components/app/app';
+import {reducer} from "./store/reducer";
+import App from "./components/app/app";
 import {AuthorizationStatus} from "./const";
 import {redirect} from "./store/middlewares/redirect";
 

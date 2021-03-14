@@ -1,6 +1,6 @@
-import React from 'react';
-import Header from '../../blocks/header/header';
-import Footer from '../../blocks/footer/footer';
+import React from "react";
+import Header from "../../blocks/header/header";
+import Footer from "../../blocks/footer/footer";
 
 const LoadingScreen = () => {
 

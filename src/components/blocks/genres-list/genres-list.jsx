@@ -1,9 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
 import {ALL_GENRES, GENRES_LIST_SIZE, AppRoute} from "../../../const";
 
 const createGenreList = (summaryItem, filmsList) => [summaryItem]

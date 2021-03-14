@@ -15,15 +15,18 @@ export const VideoStatus = {
 
 export const MAX_RATING = 10;
 
-export const MIN_COMMENT_LENGTH = 50;
-export const MAX_COMMENT_LENGTH = 400;
+export const CommentLength = {
+  MIN: 50,
+  MAX: 400,
+};
 
-export const CommentFieldsNames = {
+
+export const CommentFieldsName = {
   rating: `rating`,
   [`review-text`]: `comment`,
 };
 
-export const RatingNames = {
+export const RatingName = {
   BAD: `Bad`,
   NORMAL: `Normal`,
   GOOD: `Good`,
@@ -31,7 +34,7 @@ export const RatingNames = {
   AWESOME: `Awesome`
 };
 
-export const RatingLimits = {
+export const RatingLimit = {
   BAD: 0,
   NORMAL: 3,
   GOOD: 5,

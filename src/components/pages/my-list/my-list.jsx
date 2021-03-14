@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import MoviesList from '../../blocks/movies-list/movies-list';
-import Header from '../../blocks/header/header';
-import Footer from '../../blocks/footer/footer';
-import MovieProp from '../../props/movie.prop';
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import MoviesList from "../../blocks/movies-list/movies-list";
+import Header from "../../blocks/header/header";
+import Footer from "../../blocks/footer/footer";
+import MovieProp from "../../props/movie.prop";
 import {MOVIES_LIST_SIZE} from "../../../const";
 
 const MyList = (props) => {

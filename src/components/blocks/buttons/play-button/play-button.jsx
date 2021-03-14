@@ -1,7 +1,7 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../../store/action';
-import PropTypes from 'prop-types';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../../store/action";
+import PropTypes from "prop-types";
 
 const PlayButton = (props) => {
   const {id, redirectToRoute} = props;

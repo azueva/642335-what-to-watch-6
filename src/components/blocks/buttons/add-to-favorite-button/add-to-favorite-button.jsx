@@ -1,8 +1,8 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../../store/action';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../../store/action";
 import {addToFavorite, removeToFavorite} from "../../../../store/api-action";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import {AuthorizationStatus, AppRoute, FavoriteStatus} from "../../../../const";
 
 const AddToFavoriteButton = (props) => {

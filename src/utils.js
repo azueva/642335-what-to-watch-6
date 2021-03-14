@@ -1,5 +1,5 @@
 import React from "react";
-import {RatingNames, RatingLimits} from "./const";
+import {RatingName, RatingLimit} from "./const";
 
 export const getFilmById = (filmId, films) => {
   if (isNaN(parseInt(filmId, 10))) {
@@ -32,18 +32,18 @@ export const joinComponents = (array, dividerString, dividerJsx) => {
 
 export const ratingToName = (rating) => {
   switch (true) {
-    case (rating > RatingLimits.AWESOME):
+    case (rating > RatingLimit.AWESOME):
       return ``;
-    case (rating === RatingLimits.AWESOME):
-      return RatingNames.AWESOME;
-    case (rating >= RatingLimits.VERY_GOOD):
-      return RatingNames.VERY_GOOD;
-    case (rating >= RatingLimits.GOOD):
-      return RatingNames.GOOD;
-    case (rating >= RatingLimits.NORMAL):
-      return RatingNames.NORMAL;
-    case (rating >= RatingLimits.BAD):
-      return RatingNames.BAD;
+    case (rating === RatingLimit.AWESOME):
+      return RatingName.AWESOME;
+    case (rating >= RatingLimit.VERY_GOOD):
+      return RatingName.VERY_GOOD;
+    case (rating >= RatingLimit.GOOD):
+      return RatingName.GOOD;
+    case (rating >= RatingLimit.NORMAL):
+      return RatingName.NORMAL;
+    case (rating >= RatingLimit.BAD):
+      return RatingName.BAD;
     default: return ``;
   }
 };

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
 import Logo from "../logo/logo";
 import {AuthorizationStatus, AppRoute} from "../../../const";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import MovieProp from '../../../props/movie.prop';
+import MovieProp from "../../../props/movie.prop";
 import {ratingToName} from "../../../../utils";
 
 const MAX_STARRING = 4;

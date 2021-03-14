@@ -1,7 +1,7 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
-import Header from '../header/header';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
+import Header from "../header/header";
 
 const Promo = (props) => {
   const {promo} = props;

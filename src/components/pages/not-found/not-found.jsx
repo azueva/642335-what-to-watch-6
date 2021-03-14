@@ -1,7 +1,7 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import Header from '../../blocks/header/header';
-import Footer from '../../blocks/footer/footer';
+import React from "react";
+import {Link} from "react-router-dom";
+import Header from "../../blocks/header/header";
+import Footer from "../../blocks/footer/footer";
 import {AppRoute} from "../../../const";
 
 const NotFound = () => {

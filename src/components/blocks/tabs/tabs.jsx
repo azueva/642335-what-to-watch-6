@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
-import ReviewProp from '../../props/review.prop';
-import TabsList from '../tabs-list/tabs-list';
-import MovieOverview from '../tab-contents/movie-overview/movie-overview';
-import MovieDetails from '../tab-contents/movie-details/movie-details';
-import MovieReviews from '../tab-contents/movie-reviews/movie-reviews';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
+import ReviewProp from "../../props/review.prop";
+import TabsList from "../tabs-list/tabs-list";
+import MovieOverview from "../tab-contents/movie-overview/movie-overview";
+import MovieDetails from "../tab-contents/movie-details/movie-details";
+import MovieReviews from "../tab-contents/movie-reviews/movie-reviews";
 import {TabNames} from "../../../const";
 
 const defaultActiveTab = TabNames[0];

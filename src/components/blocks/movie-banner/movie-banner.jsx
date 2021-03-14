@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
-import Header from '../header/header';
-import MovieBannerButtonList from '../movie-banner-button-list/movie-banner-button-list';
-import AddReviewButton from '../buttons/add-review-button/add-review-button';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
+import Header from "../header/header";
+import MovieBannerButtonList from "../movie-banner-button-list/movie-banner-button-list";
+import AddReviewButton from "../buttons/add-review-button/add-review-button";
 
 const MovieBanner = (props) => {
   const {film} = props;

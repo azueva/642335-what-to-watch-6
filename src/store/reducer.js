@@ -1,4 +1,4 @@
-import {ActionType} from './action';
+import {ActionType} from "./action";
 import {ALL_GENRES, AuthorizationStatus} from "../const";
 
 const initialState = {

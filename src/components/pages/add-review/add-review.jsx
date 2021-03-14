@@ -1,13 +1,13 @@
 import React, {useEffect} from "react";
 import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
 import {fetchMovie, uploadComment} from "../../../store/api-action";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
-import Header from '../../blocks/header/header';
-import CommentForm from '../../blocks/comment-form/comment-form';
-import LoadingScreen from '../loading-screen/loading-screen';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
+import Header from "../../blocks/header/header";
+import CommentForm from "../../blocks/comment-form/comment-form";
+import LoadingScreen from "../loading-screen/loading-screen";
 import {AppRoute} from "../../../const";
 
 const AddReview = (props) => {

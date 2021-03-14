@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import MovieProp from '../../props/movie.prop';
+import MovieProp from "../../props/movie.prop";
 import MovieCard from "../movie-card/movie-card";
 import ShowMore from "../show-more/show-more";
 

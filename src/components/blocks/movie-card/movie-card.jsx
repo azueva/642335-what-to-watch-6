@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
 import {Link} from "react-router-dom";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
 import VideoPlayer from "../../video-player/video-player";
 import {VIDEO_TIMEOUT, VideoStatus, AppRoute} from "../../../const";
 

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, {useState, useEffect} from "react";
 import VideoPlayer from "../../video-player/video-player-fs";
-import PropTypes from 'prop-types';
-import {formatMinToTimeString} from '../../../utils';
+import PropTypes from "prop-types";
+import {formatMinToTimeString} from "../../../utils";
 
 const POSTER = `img/player-poster.jpg`;
 

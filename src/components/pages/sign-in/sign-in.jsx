@@ -2,8 +2,8 @@ import React, {useRef} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {login} from "../../../store/api-action";
-import Header from '../../blocks/header/header';
-import Footer from '../../blocks/footer/footer';
+import Header from "../../blocks/header/header";
+import Footer from "../../blocks/footer/footer";
 
 const SignIn = (props) => {
   const {onSubmit} = props;

@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
-import {MAX_RATING, MIN_COMMENT_LENGTH, MAX_COMMENT_LENGTH, CommentFieldsNames} from "../../../const";
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
+import {MAX_RATING, CommentLength, CommentFieldsName} from "../../../const";
 
 const CommentForm = (props) => {
   const {postComment, isUploading, startUpload} = props;
@@ -14,8 +14,8 @@ const CommentForm = (props) => {
 
   const isCommentPostValid = ({rating, comment}) => (
     rating > 0 && rating <= MAX_RATING &&
-    comment.toString().length >= MIN_COMMENT_LENGTH &&
-    comment.toString().length <= MAX_COMMENT_LENGTH
+    comment.toString().length >= CommentLength.MIN &&
+    comment.toString().length <= CommentLength.MAX
   );
 
   const handleSubmit = (evt) => {
@@ -30,7 +30,7 @@ const CommentForm = (props) => {
 
   const handleFieldChange = (evt) => {
     const {name, value} = evt.target;
-    setReviewForm({...reviewForm, [CommentFieldsNames[name]]: value});
+    setReviewForm({...reviewForm, [CommentFieldsName[name]]: value});
   };
 
   return (
@@ -63,7 +63,7 @@ const CommentForm = (props) => {
       >
         <textarea className="add-review__textarea" name="review-text" id="review-text"
           placeholder="Review text"
-          minLength={MIN_COMMENT_LENGTH}
+          minLength={CommentLength.MIN}
           disabled={isUploading}
           onChange={handleFieldChange}
         />

@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
-import {connect} from 'react-redux';
-import {ActionCreator} from '../../../store/action';
+import {connect} from "react-redux";
+import {ActionCreator} from "../../../store/action";
 import {fetchMovies, fetchPromo} from "../../../store/api-action";
-import PropTypes from 'prop-types';
-import MovieProp from '../../props/movie.prop';
-import GenresList from '../../blocks/genres-list/genres-list';
-import MoviesList from '../../blocks/movies-list/movies-list';
-import Promo from '../../blocks/promo/promo';
-import MovieBannerButtonList from '../../blocks/movie-banner-button-list/movie-banner-button-list';
-import Footer from '../../blocks/footer/footer';
-import LoadingScreen from '../loading-screen/loading-screen';
+import PropTypes from "prop-types";
+import MovieProp from "../../props/movie.prop";
+import GenresList from "../../blocks/genres-list/genres-list";
+import MoviesList from "../../blocks/movies-list/movies-list";
+import Promo from "../../blocks/promo/promo";
+import MovieBannerButtonList from "../../blocks/movie-banner-button-list/movie-banner-button-list";
+import Footer from "../../blocks/footer/footer";
+import LoadingScreen from "../loading-screen/loading-screen";
 import {MOVIES_LIST_SIZE} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
 

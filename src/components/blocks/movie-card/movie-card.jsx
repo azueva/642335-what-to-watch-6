@@ -9,7 +9,7 @@ import {VIDEO_TIMEOUT, VideoStatus, AppRoute} from "../../../const";
 
 const MovieCard = (props) => {
   const {film, onHover} = props;
-  const {id, name, previewImage, previewVideoPoster, previewVideoLink} = film;
+  const {id, name, previewImage, previewVideoLink} = film;
   const {redirectToRoute} = props;
   const [isPlayerVisible, setIsPlayerVisible] = useState(false);
   const [timer, setTimer] = useState(null);
@@ -57,7 +57,7 @@ const MovieCard = (props) => {
             isMuted={true}
             isAutoPlay={true}
             src={previewVideoLink}
-            poster={previewVideoPoster}
+            poster={previewImage}
             style={{
               objectFit: `cover`
             }}

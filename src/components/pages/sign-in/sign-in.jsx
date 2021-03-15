@@ -50,6 +50,7 @@ const SignIn = (props) => {
                 name="user-password"
                 id="user-password"
                 ref={passwordRef}
+                required={true}
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>
             </div>

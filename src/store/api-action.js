@@ -15,6 +15,7 @@ export const fetchPromo = () => (dispatch, _getState, api) => (
 export const fetchComments = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.COMMENTS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadComments(data.map(adapter.rawToComment))))
+    .catch(() => {})
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
@@ -54,6 +55,7 @@ export const uploadComment = (id, {rating, comment}) => (dispatch, _getState, ap
 export const setFavoriteFilm = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status ? FavoriteStatus.ON : FavoriteStatus.OFF}`)
   .then(({data}) => dispatch(ActionCreator.loadMovie(adapter.rawToFilm(data))))
+  .catch(() => {})
 );
 
 export const setFavoritePromo = (id, status) => (dispatch, _getState, api) => (

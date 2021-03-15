@@ -4,9 +4,10 @@ import {ALL_GENRES, AuthorizationStatus} from "../const";
 const initialState = {
   genre: ALL_GENRES,
   films: [],
+  favorites: [],
   promo: {},
   film: {},
-  isDataLoaded: {films: false, promo: false, film: false},
+  isDataLoaded: {films: false, promo: false, film: false, favorites: false},
   isReviewUploading: false,
   reviews: [],
   authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -26,6 +27,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         films: action.payload,
         isDataLoaded: {...state.isDataLoaded, films: true}
+      };
+
+    case ActionType.LOAD_FAVORITES:
+      return {
+        ...state,
+        favorites: action.payload,
+        isDataLoaded: {...state.isDataLoaded, favorites: true}
       };
 
     case ActionType.LOAD_PROMO:

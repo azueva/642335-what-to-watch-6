@@ -8,6 +8,7 @@ export const ActionType = {
   START_COMMENT_UPLOAD: `START_COMMENT_UPLOAD`,
   END_COMMENT_UPLOAD: `END_COMMENT_UPLOAD`,
   LOAD_COMMENTS: `LOAD_COMMENTS`,
+  LOAD_FAVORITES: `LOAD_FAVORITES`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   GET_USER_INFO: `GET_USER_INFO`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
@@ -41,6 +42,11 @@ export const ActionCreator = {
 
   loadComments: (payload) => ({
     type: ActionType.LOAD_COMMENTS,
+    payload,
+  }),
+
+  loadFavorites: (payload) => ({
+    type: ActionType.LOAD_FAVORITES,
     payload,
   }),
 

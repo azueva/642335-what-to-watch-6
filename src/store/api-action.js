@@ -51,10 +51,6 @@ export const uploadComment = (id, {rating, comment}) => (dispatch, _getState, ap
     .finally(dispatch(ActionCreator.endCommentUpload()))
 );
 
-// export const addToFavorite = (id) => (dispatch, _getState, api) => (
-//   api.post(`${APIRoute.FAVORITE}/${id}/1`)
-// );
-
 export const setFavoriteFilm = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status ? FavoriteStatus.ON : FavoriteStatus.OFF}`)
   .then(({data}) => dispatch(ActionCreator.loadMovie(adapter.rawToFilm(data))))
@@ -63,4 +59,9 @@ export const setFavoriteFilm = (id, status) => (dispatch, _getState, api) => (
 export const setFavoritePromo = (id, status) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.FAVORITE}/${id}/${status ? FavoriteStatus.ON : FavoriteStatus.OFF}`)
   .then(({data}) => dispatch(ActionCreator.loadPromo(adapter.rawToFilm(data))))
+);
+
+export const fetchFavorites = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => dispatch(ActionCreator.loadFavorites(data.map(adapter.rawToFilm))))
 );

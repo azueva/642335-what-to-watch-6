@@ -3,7 +3,6 @@ import {connect} from "react-redux";
 import {fetchMovie, fetchComments, fetchMovies} from "../../../store/api-action";
 import PropTypes from "prop-types";
 import MovieProp from "../../props/movie.prop";
-// import ReviewProp from "../../props/review.prop";
 import MoviesList from "../../blocks/movies-list/movies-list";
 import Footer from "../../blocks/footer/footer";
 import MovieBanner from "../../blocks/movie-banner/movie-banner";

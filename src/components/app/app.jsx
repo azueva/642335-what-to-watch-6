@@ -121,5 +121,5 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-export {MyList};
+export {App};
 export default connect(mapStateToProps, mapDispatchToProps)(App);

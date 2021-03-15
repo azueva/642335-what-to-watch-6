@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
 import browserHistory from "../../browser-history";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import PrivateRoute from "../private-route/private-route";
+import {fetchMovies, fetchPromo} from "../../store/api-action";
+import LoadingScreen from "../pages/loading-screen/loading-screen";
 import Main from "../pages/main/main";
 import SignIn from "../pages/sign-in/sign-in";
 import MyList from "../pages/my-list/my-list";
@@ -13,18 +15,31 @@ import Player from "../pages/player/player";
 import NotFound from "../pages/not-found/not-found";
 import MovieProp from "../props/movie.prop";
 import {AppRoute} from "../../const";
-import {getFilmById} from "../../utils";
 
 const App = (props) => {
-  const {films} = props;
+  const {loadMovies, loadPromo, isDataLoaded} = props;
+
+  useEffect(() => {
+    if (!isDataLoaded.promo) {
+      loadPromo();
+    }
+    if (!isDataLoaded.films) {
+      loadMovies();
+    }
+  }, [isDataLoaded]);
 
   return (
     <BrowserRouter history={browserHistory}>
       <Switch>
 
-        <Route exact path={AppRoute.ROOT}>
-          <Main />
-        </Route>
+        <Route exact path={AppRoute.ROOT}
+          render={() => {
+            if (!isDataLoaded.films || !isDataLoaded.promo) {
+              return <LoadingScreen />;
+            }
+            return <Main />;
+          }}
+        />
 
         <Route exact path={AppRoute.LOGIN}>
           <SignIn />
@@ -40,8 +55,7 @@ const App = (props) => {
             const filmId = match.params.id;
             return (
               <Film
-                filmId={parseInt(filmId, 10)}
-                films={films}
+                id={parseInt(filmId, 10)}
               />);
           }}
         />
@@ -58,13 +72,14 @@ const App = (props) => {
 
         <Route exact path={`${AppRoute.PLAYER}/:id`}
           render={({match, history}) => {
-            const film = getFilmById(match.params.id, films);
-            return film ?
+            // const film = getFilmById(match.params.id, films);
+            const filmId = parseInt(match.params.id, 10);
+            return filmId ?
               <Player
-                id={film.id}
-                name={film.name}
-                videoLink={film.videoLink}
-                runTime={film.runTime}
+                id={filmId}
+                // name={film.name}
+                // videoLink={film.videoLink}
+                // runTime={film.runTime}
                 redirectToPrevPage={history.goBack}
               /> :
               <NotFound />;
@@ -86,12 +101,25 @@ const App = (props) => {
 
 App.propTypes = {
   films: PropTypes.arrayOf(MovieProp),
+  loadMovies: PropTypes.func,
+  loadPromo: PropTypes.func,
+  isDataLoaded: PropTypes.object,
 };
 
 
 const mapStateToProps = (state) => ({
-  films: state.films,
+  // films: state.films,
+  isDataLoaded: state.isDataLoaded,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  loadMovies() {
+    dispatch(fetchMovies());
+  },
+  loadPromo() {
+    dispatch(fetchPromo());
+  },
 });
 
 export {MyList};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

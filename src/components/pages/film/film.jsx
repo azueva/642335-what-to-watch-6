@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {fetchMovie, fetchComments, fetchMovies} from "../../../store/api-action";
 import PropTypes from "prop-types";
 import MovieProp from "../../props/movie.prop";
-import ReviewProp from "../../props/review.prop";
+// import ReviewProp from "../../props/review.prop";
 import MoviesList from "../../blocks/movies-list/movies-list";
 import Footer from "../../blocks/footer/footer";
 import MovieBanner from "../../blocks/movie-banner/movie-banner";
@@ -13,14 +13,16 @@ import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
 
 const Film = (props) => {
-  const {filmId, films, reviews, film, loadMovie, isDataLoaded} = props;
+  const {id} = props;
+  const {films, loadMovie, isDataLoaded} = props;
 
   useEffect(() => {
-    loadMovie(filmId);
+    loadMovie(id);
     return () => {
       isDataLoaded.film = false;
     };
-  }, [filmId]);
+  }, [id]);
+
 
   if (!isDataLoaded.film) {
     return (
@@ -31,41 +33,33 @@ const Film = (props) => {
   return (
     <React.Fragment>
 
-      <MovieBanner film={film}>
-        <Tabs
-          film={film}
-          reviews={reviews}
-        />
+      <MovieBanner >
+        <Tabs />
       </MovieBanner>
 
       <div className="page-content">
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={films.filter((el) => el.id !== +filmId)
+            films={films.filter((el) => el.id !== +id)
             .slice(0, EXTRA_MOVIES_LIST_SIZE)}
           />
         </section>
 
         <Footer />
       </div>
-
     </React.Fragment>
   );
 };
 
 Film.propTypes = {
-  filmId: PropTypes.number,
+  id: PropTypes.number.isRequired,
   isDataLoaded: PropTypes.object,
   films: PropTypes.arrayOf(MovieProp).isRequired,
-  reviews: PropTypes.arrayOf(ReviewProp).isRequired,
-  film: MovieProp.isRequired,
   loadMovie: PropTypes.func,
 };
 
 const mapStateToProps = (state) => ({
-  film: state.film,
-  reviews: state.reviews,
   films: getFilmsByGenre(state.genre, state.films),
   isDataLoaded: state.isDataLoaded,
 });

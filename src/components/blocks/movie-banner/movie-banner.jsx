@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MovieProp from "../../props/movie.prop";
 import Header from "../header/header";
@@ -59,8 +60,13 @@ const MovieBanner = (props) => {
 };
 
 MovieBanner.propTypes = {
-  film: MovieProp,
+  film: MovieProp.isRequired,
   children: PropTypes.node,
 };
 
-export default MovieBanner;
+const mapStateToProps = (state) => ({
+  film: state.film,
+});
+
+export {MovieBanner};
+export default connect(mapStateToProps)(MovieBanner);

@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import MovieProp from "../../props/movie.prop";
 import ReviewProp from "../../props/review.prop";
@@ -53,4 +54,11 @@ Tabs.propTypes = {
   reviews: PropTypes.arrayOf(ReviewProp).isRequired,
 };
 
-export default Tabs;
+
+const mapStateToProps = (state) => ({
+  film: state.film,
+  reviews: state.reviews,
+});
+
+export {Tabs};
+export default connect(mapStateToProps)(Tabs);

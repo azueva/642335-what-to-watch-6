@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AppRoute, APIRoute, AuthorizationStatus} from "../const";
+import {AppRoute, APIRoute, AuthorizationStatus, FavoriteStatus} from "../const";
 import {adapter} from "../utils";
 
 export const fetchMovies = () => (dispatch, _getState, api) => (
@@ -51,10 +51,16 @@ export const uploadComment = (id, {rating, comment}) => (dispatch, _getState, ap
     .finally(dispatch(ActionCreator.endCommentUpload()))
 );
 
-export const addToFavorite = (id) => (dispatch, _getState, api) => (
-  api.post(`${APIRoute.FAVORITE}/${id}/1`)
+// export const addToFavorite = (id) => (dispatch, _getState, api) => (
+//   api.post(`${APIRoute.FAVORITE}/${id}/1`)
+// );
+
+export const setFavoriteFilm = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${status ? FavoriteStatus.ON : FavoriteStatus.OFF}`)
+  .then(({data}) => dispatch(ActionCreator.loadMovie(adapter.rawToFilm(data))))
 );
 
-export const removeToFavorite = (id) => (dispatch, _getState, api) => (
-  api.post(`${APIRoute.FAVORITE}/${id}/0`)
+export const setFavoritePromo = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITE}/${id}/${status ? FavoriteStatus.ON : FavoriteStatus.OFF}`)
+  .then(({data}) => dispatch(ActionCreator.loadPromo(adapter.rawToFilm(data))))
 );

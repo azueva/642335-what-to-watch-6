@@ -8,7 +8,7 @@ import AddReviewButton from "../buttons/add-review-button/add-review-button";
 
 const MovieBanner = (props) => {
   const {film} = props;
-  const {id, name, posterImage, backgroundImage, backgroundColor, genre = ``, released} = film;
+  const {id, name, posterImage, backgroundImage, backgroundColor, genre = ``, released, isFavorite} = film;
   const tabsList = props.children;
 
   return (
@@ -34,7 +34,7 @@ const MovieBanner = (props) => {
               <span className="movie-card__year">{released}</span>
             </p>
 
-            <MovieBannerButtonList id={id}>
+            <MovieBannerButtonList id={id} isFavorite={isFavorite}>
 
               <AddReviewButton id={id} />
 

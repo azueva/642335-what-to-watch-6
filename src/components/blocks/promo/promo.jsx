@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import MovieProp from "../../props/movie.prop";
 import Header from "../header/header";
+import MovieBannerButtonList from "../movie-banner-button-list/movie-banner-button-list";
 
 const Promo = (props) => {
   const {promo} = props;
   const {name, posterImage, backgroundImage, genre, released} = promo;
-  const headerButtonsList = props.children;
 
   return (
     <section className="movie-card"
@@ -34,7 +33,11 @@ const Promo = (props) => {
               <span className="movie-card__year">{released}</span>
             </p>
 
-            {headerButtonsList}
+            <MovieBannerButtonList
+              id={promo.id}
+              isFavorite={promo.isFavorite}
+              isPromo={true}
+            />
 
           </div>
         </div>
@@ -45,7 +48,6 @@ const Promo = (props) => {
 
 Promo.propTypes = {
   promo: MovieProp,
-  children: PropTypes.node,
 };
 
 export default Promo;

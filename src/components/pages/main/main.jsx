@@ -6,7 +6,6 @@ import MovieProp from "../../props/movie.prop";
 import GenresList from "../../blocks/genres-list/genres-list";
 import MoviesList from "../../blocks/movies-list/movies-list";
 import Promo from "../../blocks/promo/promo";
-import MovieBannerButtonList from "../../blocks/movie-banner-button-list/movie-banner-button-list";
 import Footer from "../../blocks/footer/footer";
 import {MOVIES_LIST_SIZE} from "../../../const";
 import {getFilmsByGenre} from "../../../store/selectors";
@@ -20,14 +19,8 @@ const Main = (props) => {
 
   return (
     <React.Fragment>
-      <Promo
-        promo={promo}
-      >
-        <MovieBannerButtonList
-          id={promo.id}
-        />
 
-      </Promo>
+      <Promo promo={promo} />
 
       <div className="page-content">
         <section className="catalog">

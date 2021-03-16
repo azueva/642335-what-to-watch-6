@@ -64,8 +64,8 @@ MovieBanner.propTypes = {
   children: PropTypes.node,
 };
 
-const mapStateToProps = (state) => ({
-  film: state.film,
+const mapStateToProps = ({DATA}) => ({
+  film: DATA.film,
 });
 
 export {MovieBanner};

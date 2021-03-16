@@ -107,9 +107,8 @@ App.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
-  // films: state.films,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({DATA}) => ({
+  isDataLoaded: DATA.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

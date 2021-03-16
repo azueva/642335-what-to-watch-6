@@ -45,8 +45,8 @@ AddToFavoriteButton.propTypes = {
   isPromo: PropTypes.bool,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -44,10 +44,10 @@ Main.propTypes = {
   resetPage: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  activeGenre: state.genre,
-  films: getFilmsByGenre(state.genre, state.films),
-  promo: state.promo,
+const mapStateToProps = ({GENRE, DATA}) => ({
+  activeGenre: GENRE.genre,
+  films: getFilmsByGenre(GENRE.genre, DATA.films),
+  promo: DATA.promo,
 });
 
 const mapDispatchToProps = (dispatch) => ({

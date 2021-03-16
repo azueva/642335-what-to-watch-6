@@ -78,9 +78,9 @@ AddReview.propTypes = {
   writeComment: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  film: state.film,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({DATA}) => ({
+  film: DATA.film,
+  isDataLoaded: DATA.isDataLoaded,
 });
 
 

@@ -87,8 +87,8 @@ CommentForm.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
-  isUploading: state.isReviewUploading,
+const mapStateToProps = ({PROCESS}) => ({
+  isUploading: PROCESS.isReviewUploading,
 });
 
 const mapDispatchToProps = (dispatch) => ({

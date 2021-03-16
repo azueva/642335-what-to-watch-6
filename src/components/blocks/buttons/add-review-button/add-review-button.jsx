@@ -21,8 +21,8 @@ AddReviewButton.propTypes = {
   id: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+const mapStateToProps = ({USER}) => ({
+  authorizationStatus: USER.authorizationStatus,
 });
 
 export {AddReviewButton};

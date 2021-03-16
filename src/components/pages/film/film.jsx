@@ -58,9 +58,9 @@ Film.propTypes = {
   loadMovie: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  films: getFilmsByGenre(state.genre, state.films),
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({GENRE, DATA}) => ({
+  films: getFilmsByGenre(GENRE.genre, DATA.films),
+  isDataLoaded: DATA.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

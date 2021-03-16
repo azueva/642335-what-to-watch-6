@@ -55,9 +55,9 @@ Tabs.propTypes = {
 };
 
 
-const mapStateToProps = (state) => ({
-  film: state.film,
-  reviews: state.reviews,
+const mapStateToProps = ({DATA}) => ({
+  film: DATA.film,
+  reviews: DATA.reviews,
 });
 
 export {Tabs};

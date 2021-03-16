@@ -54,9 +54,9 @@ MyList.propTypes = {
   isDataLoaded: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-  favorites: state.favorites,
-  isDataLoaded: state.isDataLoaded,
+const mapStateToProps = ({DATA}) => ({
+  favorites: DATA.favorites,
+  isDataLoaded: DATA.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({

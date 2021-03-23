@@ -8,8 +8,7 @@ import Footer from "../../blocks/footer/footer";
 import MovieBanner from "../../blocks/movie-banner/movie-banner";
 import Tabs from "../../blocks/tabs/tabs";
 import LoadingScreen from "../loading-screen/loading-screen";
-import {EXTRA_MOVIES_LIST_SIZE} from "../../../const";
-import {getFilmsByGenre} from "../../../store/selectors";
+import {getSimilarFilms} from "../../../store/selectors";
 
 const Film = (props) => {
   const {id} = props;
@@ -40,8 +39,7 @@ const Film = (props) => {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
           <MoviesList
-            films={films.filter((el) => el.id !== +id)
-            .slice(0, EXTRA_MOVIES_LIST_SIZE)}
+            films={films}
           />
         </section>
 
@@ -58,9 +56,9 @@ Film.propTypes = {
   loadMovie: PropTypes.func,
 };
 
-const mapStateToProps = ({GENRE, DATA}) => ({
-  films: getFilmsByGenre(GENRE.genre, DATA.films),
-  isDataLoaded: DATA.isDataLoaded,
+const mapStateToProps = (state) => ({
+  films: getSimilarFilms(state),
+  isDataLoaded: state.DATA.isDataLoaded,
 });
 
 const mapDispatchToProps = (dispatch) => ({
